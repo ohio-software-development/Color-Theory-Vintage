@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
-const Explore = ({navigation}) => {
+const Profile = ({navigation}) => {
   return (
     <View style = {styles.container}>
-      <Text>Welcome to the explore tab!</Text>
+      <Text>Welcome to the profile tab!</Text>
       <Button
         title = "Hey this is a button"
         onPress={() => alert("hey you clicked me!")}>
@@ -12,7 +12,7 @@ const Explore = ({navigation}) => {
     </View>
   );
 }
-export default Explore;
+export default Profile;
 
 const styles = StyleSheet.create({
   container:{
