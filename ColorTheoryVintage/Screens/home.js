@@ -31,10 +31,8 @@ const Home = ({navigation}) => {
 
         <View style={feedStyles.rowContainer}>
           <ItemCard
-            srcImage={current_item.srcImage}
-            price = {current_item.price}
-            size = {current_item.size}
-            brand = {current_item.brand}
+            item = {current_item}
+            navigation = {navigation}
           />
           <Image 
             style={feedStyles.image}

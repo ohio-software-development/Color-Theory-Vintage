@@ -6,21 +6,22 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Header } from "react-native-elements";
 
 
-const itemStack = createStackNavigator();
 
-const ItemCard = ({ srcImage, price = "Variable", size = "No Size", brand = "Unknown Brand", navigation }) => {
-    const itemCard = 
-        <Pressable onPress={() => alert("hello!")}>
-            <View>
-                <Image
-                    style = {styles.image}
-                    source={srcImage}
-                />
-                <Text>{size}</Text>
-                <Text>{brand}</Text>
-            </View>
+
+const ItemCard = ({item, navigation}) => {
+    const ItemCardComponent = () => (
+        <Pressable onPress={() => navigation.navigate("ItemScreen")}>
+          <View>
+            <Image
+              style={styles.image}
+              source={item.srcImage}
+            />
+            <Text>{item.size}</Text>
+            <Text>{item.brand}</Text>
+          </View>
         </Pressable>
-    return itemCard
+      );
+    return ItemCardComponent();
 }
 
 const styles = StyleSheet.create({

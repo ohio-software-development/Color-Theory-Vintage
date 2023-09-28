@@ -4,6 +4,7 @@ import Explore from "../Screens/explore";
 import Home from "../Screens/home";
 import Search from "../Screens/search";
 import Profile from "../Screens/profile";
+import ItemScreen from "../Screens/itemScreen";
 
 const Tab = createBottomTabNavigator();
 

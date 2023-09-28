@@ -1,10 +1,15 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import MyTabs from "./navigation/tabs";
+import MyScreens from "./navigation/screens";
+import { createStackNavigator } from "@react-navigation/stack";
+import ItemScreen from "./Screens/itemScreen";
+
+const Stack = createStackNavigator();
+
 const App = () => {
   return (
     <NavigationContainer>
-      <MyTabs/>
+      <MyScreens/>
     </NavigationContainer>
   );
 }
