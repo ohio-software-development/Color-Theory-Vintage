@@ -1,22 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, View, Image, Button, Alert, Pressable } from 'react-native';
 // import spongebob from "../assets/spongebob.webp";
 import { Header } from "react-native-elements";
-import ItemCard from "/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/component/ItemCard.js"
-import Item from "/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/classes/Item.js";
+import ItemCard from "../component/ItemCard.js"
+import {AppContext} from "../App.js";
 
-import User from "/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/classes/User.js";
 
-const spongebob_picture = require("../assets/spongebob.webp");
-
-let testUser = new User("Jay Lo", "Hi my name is Jay Lo", [] ,["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"]);
-let testItem = new Item(spongebob_picture, "50", "L", "Nike");
-testUser.addItem(testItem);
-current_item = testUser.getNextItem();
-
-console.log(testUser.displayInfo());
 
 const Home = ({navigation}) => {
+  const user = useContext(AppContext);
   return (
     <View >
       <Header 
@@ -30,10 +22,7 @@ const Home = ({navigation}) => {
       <View style={feedStyles.ColumnContainer}>
 
         <View style={feedStyles.rowContainer}>
-          <ItemCard
-            item = {current_item}
-            navigation = {navigation}
-          />
+          <ItemCard/>
           <Image 
             style={feedStyles.image}
             source={require("../assets/spongebob.webp")}

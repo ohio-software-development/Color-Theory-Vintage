@@ -1,20 +1,27 @@
 export default class User {
-  constructor(name, bio, items, followers, following) {
+  constructor(name, bio,followers, following) {
     this.name = name;
     this.bio = bio;
-    this.items = items;
+    this.items = [];
     this.currentItemsIndex = 0;
     this.followers = followers;
     this.following = following;
   }
 
+  getCurrentItem(){
+    console.log(this.items);
+    if((this.items.length) > 0){
+      return this.items[this.currentItemsIndex];
+    } else {
+      return "";
+    }
+  }
 
   getNextItem() {
     if (this.items.length != 0) {
       result = this.items[this.currentItemsIndex];
       this.currentItemsIndex++;
       return result;
-
     }
   }
   // Getter for the user's full profile
