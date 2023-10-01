@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, View, Image, Button, Alert, Pressable } from 'react-native';
-// import spongebob from "../assets/spongebob.webp";
 import { Header } from "react-native-elements";
 import ItemCard from "../component/ItemCard.js"
 import {AppContext} from "../App.js";
@@ -12,9 +11,9 @@ const Home = ({navigation}) => {
   return (
     <View >
       <Header 
-        backgroundColor = "#DFE0E1"      
-        leftComponent={{ icon: 'menu', color: 'black' }}
-        centerComponent={{ text: '?COLOR THEORY?', style: { color: 'black' } }}
+        containerStyle={headerStyles.headerContainer}
+        leftComponent={{ icon: 'menu', color: headerStyles.menuIcon.color }}
+        centerComponent={{ text: 'Color Theory Vintage!', style: headerStyles.headerText }}
       />
       <View>
           <Text style={{fontSize: 35}}>Your Feed</Text>
@@ -62,12 +61,18 @@ const feedStyles = StyleSheet.create({
   }
 });
 
+export const headerStyles = StyleSheet.create({
+  headerContainer: {
+    backgroundColor: 'white',
+    borderBottomWidth: 0, // Removes the border at the bottom of the header
+  },
+  headerText: {
+    color: 'black',
+    fontSize: 20,
+  },
+  menuIcon: {
+    color: 'black',
+  },
+});
 
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-  }
-})
 

@@ -1,15 +1,11 @@
 export default class Item {
-    constructor(srcImage, price = "Variable", size = "No Size", brand = "Unknown Brand") {
+    constructor(srcImage, price = "Variable", size = "No Size", brand = "Unknown Brand", description = "", catagory="Unkown", condition="Null") {
       this.srcImage = srcImage;
       this.price = price;
       this.size = size;
       this.brand = brand;
+      this.description = description;
+      this.catagory = catagory;
+      this.condition = condition
     }
-  
-    displayInfo() {
-      console.log(`Image Source: ${this.srcImage}`);
-      console.log(`Price: ${this.price}`);
-      console.log(`Size: ${this.size}`);
-      console.log(`Brand: ${this.brand}`);
-    }
-  }
+}

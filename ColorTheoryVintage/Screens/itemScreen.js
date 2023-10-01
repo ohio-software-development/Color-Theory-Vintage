@@ -1,32 +1,91 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from "react";
 import { AppContext } from "../App.js";
-import { StyleSheet, Text, View, Image, Pressable, Button} from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, Button, TouchableOpacity} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ArrowLeft } from "react-native-feather";
+import StandardHeader from '../component/StandardHeader.js';
+import MyTabs from '../navigation/tabs.js';
+import UserScreen from './UserScreen.js';
 
 const ItemScreen = () => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
+    const item = user.getCurrentItem();
     return (
         <View style={styles.container}>
-            <Text>hello</Text>
-            <Text>{user.bio}</Text>
-        <Button
-            title = "Go Back"
-            onPress={() => navigation.goBack()}>
-        </Button>
-        <Button
-            title = "Create another page"
-            onPress={() => navigation.push("ItemScreen")}>
-        </Button>
+            <StandardHeader/>
+            <Image
+                style = {styles.image} 
+                source={item.srcImage}
+            />
+            <View style={styles.overview}>
+                <Text style={styles.overviewContent}>{item.brand + " ∙ " + item.catagory}</Text>
+                <Text style={styles.overviewSubContent}>{"Size " + item.size + " ∙ " + item.condition}</Text>
+            </View>
+                <Pressable style={styles.userInformationDiv} onPress={() => navigation.navigate("UserScreen")} >
+                    <Image
+                        source={user.profile_picture}
+                        style={styles.userProfilePicture}
+                    />
+                    <Text style={styles.userInformationContent}>{user.name}</Text>
+                </Pressable>
+                <View style={styles.descriptionContainer}>
+                    <Text style={{fontWeight: "bold", marginLeft: 10}}>{user.name}</Text>
+                    <Text style ={{marginLeft: 5}}>{item.description}</Text>
+                </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-      flex:1,
-      alignItems:'center',
-      justifyContent:'center',
+        backgroundColor: 'white',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    overview:{
+        bottom: 0,
+        justifyContent: 'space-between',
+        width:'100%',
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderBlockColor: "grey"
+    },
+    overviewContent:{
+        fontSize: 20,
+    },
+    overviewSubContent:{
+        fontSize: 15,
+        color: "grey",
+    },
+    userInformationDiv: {
+        flexDirection: "row",
+        marginTop: 10,
+        bottom: 0,
+        alignItems: "center",
+        width:'100%',
+    },
+    userInformationContent: {
+        marginLeft: 15,
+        fontSize: 15,
+
+    },
+    userProfilePicture:{
+        marginLeft: 15,
+        width:35,
+        height:35,
+        borderRadius: 100,
+    },
+    descriptionContainer: {
+        marginTop: 10,
+        flexDirection: "row",
+        width: "100%",
+        borderWidth: 1,
+    },
+    image:{
+        width: 450,
+        height: 415
     }
   })
 

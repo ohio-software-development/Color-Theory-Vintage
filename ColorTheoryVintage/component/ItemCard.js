@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Header } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from "../App.js";
 

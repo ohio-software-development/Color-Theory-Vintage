@@ -1,30 +1,39 @@
 import React, {createContext, useState} from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import MyScreens from "./navigation/screens";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import MyTabs from "./navigation/tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import ItemScreen from "./Screens/itemScreen";
+import ItemScreen from "./Screens/ItemScreen";
 import User from "./classes/User.js";
 import Item from "./classes/Item.js";
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 const spongebob_picture = require("./assets/spongebob.webp");
+const Red_gem_earings = require("/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/assets/earings.webp")
+const profile_picture = require("/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/assets/cat.jpeg");
 
-let testUser = new User("Jay Lo", "Hi my name is Owen", ["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"]);
-let testItem = new Item(spongebob_picture, "50", "L", "Nike");
+//Create a User and add an Item
+let testUser = new User("Owen Turnbull", "Hi my name is Owen", ["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"], profile_picture);
+let testItem = new Item(Red_gem_earings, 1050, "6mm", "Cartier", "Vintage earings for sale!", "earings", "Used");
 testUser.addItem(testItem);
 
+//Used to pass User object
 export const AppContext = createContext();
-const Stack = createStackNavigator();
+
+const MyTheme = {colors: {...DefaultTheme.colors,background: 'white'},};
 
 const App = () => {
   const [user, setUser] = useState(testUser)
   return (
-    <AppContext.Provider value={{user, setUser}}>
-      <NavigationContainer>
-        <MyScreens/>
-      </NavigationContainer>
-    </AppContext.Provider>
+    <SafeAreaProvider>
+      <AppContext.Provider value={{user, setUser}}>
+        <NavigationContainer theme={MyTheme}>
+          <MyTabs />
+        </NavigationContainer>
+      </AppContext.Provider>
+    </SafeAreaProvider>
   );
 }
+
+
 export default App;
 
 // const styles = StyleSheet.create({

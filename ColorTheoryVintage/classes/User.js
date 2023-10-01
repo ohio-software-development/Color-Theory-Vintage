@@ -1,15 +1,15 @@
 export default class User {
-  constructor(name, bio,followers, following) {
+  constructor(name, bio,followers, following, profile_picture) {
     this.name = name;
     this.bio = bio;
     this.items = [];
     this.currentItemsIndex = 0;
     this.followers = followers;
     this.following = following;
+    this.profile_picture = profile_picture
   }
 
   getCurrentItem(){
-    console.log(this.items);
     if((this.items.length) > 0){
       return this.items[this.currentItemsIndex];
     } else {
