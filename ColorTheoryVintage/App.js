@@ -7,8 +7,8 @@ import User from "./classes/User.js";
 import Item from "./classes/Item.js";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 const spongebob_picture = require("./assets/spongebob.webp");
-const Red_gem_earings = require("/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/assets/earings.webp")
-const profile_picture = require("/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/assets/cat.jpeg");
+const Red_gem_earings = require("./assets/earings.webp")
+const profile_picture = require("./assets/cat.jpeg");
 
 //Create a User and add an Item
 let testUser = new User("Owen Turnbull", "Hi my name is Owen", ["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"], profile_picture);
@@ -32,8 +32,6 @@ const App = () => {
     </SafeAreaProvider>
   );
 }
-
-
 export default App;
 
 // const styles = StyleSheet.create({

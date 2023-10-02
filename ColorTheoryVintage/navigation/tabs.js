@@ -3,6 +3,7 @@ import { Search, Home, User } from "react-native-feather";
 import { Ionicons } from '@expo/vector-icons'
 import {HomeScreenNavigator, ExploreScreenNavigator, ProfileScreenNavigator} from '../navigation/screenNavigation'
 
+
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {

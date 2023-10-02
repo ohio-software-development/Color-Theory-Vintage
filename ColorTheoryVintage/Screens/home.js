@@ -18,7 +18,6 @@ const Home = () => {
           <Text style={{fontSize: 35}}>Your Feed</Text>
       </View>
       <View style={feedStyles.ColumnContainer}>
-
         <View style={feedStyles.rowContainer}>
           <ItemCard/>
           <Image 
@@ -74,4 +73,11 @@ export const headerStyles = StyleSheet.create({
   },
 });
 
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+  }
+})
 
