@@ -4,7 +4,7 @@ import { fonts } from "react-native-elements/dist/config";
 
 const Profile = ({ navigation }) => {
   return (
-    <View style={{ backgroundColor: "white", height: "100%" }}>
+    <View style={{ backgroundColor: "#FFFFFF", height: "100%" }}>
       <View
         style={{
           flexDirection: "row",
