@@ -1,5 +1,5 @@
 export default class User {
-  constructor(name, bio,followers, following, profile_picture) {
+  constructor(name, bio, followers, following, profile_picture) {
     this.name = name;
     this.bio = bio;
     this.items = [];
@@ -24,7 +24,7 @@ export default class User {
       return result;
     }
   }
-  // Getter for the user's full profile
+
   getProfile() {
     return {
       name: this.name,
@@ -35,22 +35,18 @@ export default class User {
     };
   }
 
-  // Method to add an item to the user's list of items
   addItem(item) {
     this.items.push(item);
   }
 
-  // Method to increase the number of followers
-  addFollower() {
-    this.followers++;
+  addFollower(follower) {
+    this.followers.push(follower);
   }
 
-  // Method to increase the number of following
-  addFollowing() {
-    this.following++;
+  addFollowing(follower) {
+    this.following.push(follower);
   }
 
-  // Method to display basic user information
   displayInfo() {
     console.log(`Name: ${this.name}`);
     console.log(`Bio: ${this.bio}`);

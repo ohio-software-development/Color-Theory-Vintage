@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
 
-const Profile = ({navigation}) => {
+
+const Profile = () => {
   return (
     <View style = {styles.container}>
       <Text>Welcome to the profile tab!</Text>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import StandardHeader from '../component/StandardHeader';
 
-const UserScreen = ({navigation}) => {
+const UserScreen = () => {
   return (
     <View style = {styles.container}>
         <StandardHeader/>

@@ -1,20 +1,29 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Explore from "../Screens/explore";
-import Home from "../Screens/home";
-import Search from "../Screens/search";
-import Profile from "../Screens/profile";
-import ItemScreen from "../Screens/ItemScreen";
-import {HomeScreenNavigator, ExploreScreenNavigator, ProfileScreenNavigator} from '/Users/owenturnbull/Documents/cs_projects/Color-Theory-Vintage/ColorTheoryVintage/navigation/screenNavigation'
+import { Search, Home, User } from "react-native-feather";
+import { Ionicons } from '@expo/vector-icons'
+import {HomeScreenNavigator, ExploreScreenNavigator, ProfileScreenNavigator} from '../navigation/screenNavigation'
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   return (
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Home" component={HomeScreenNavigator}/>
-        <Tab.Screen name="Explore" component={ExploreScreenNavigator} />
-        <Tab.Screen name="Profile" component={ProfileScreenNavigator} />
+      <Tab.Navigator screenOptions={{ headerShown: false, tabBarStyle: {height: 60}}} >
+        <Tab.Screen
+          name="Home" 
+          component={HomeScreenNavigator}
+          options={{tabBarLabel:() => {return null}, tabBarIcon: ({ color, size }) => (<Home color={"black"}/>)}}
+        />
+        <Tab.Screen 
+          name="Explore" 
+          component={ExploreScreenNavigator} 
+          options={{tabBarLabel:() => {return null}, tabBarIcon: ({ color, size }) => (<Search color={"black"}/>)}}
+        />
+        <Tab.Screen 
+          name="Profile"
+          component={ProfileScreenNavigator} 
+          options={{tabBarLabel:() => {return null}, tabBarIcon: ({ color, size }) => (<User color={"black"}/>)}}
+        />
+          
       </Tab.Navigator>
     
   );

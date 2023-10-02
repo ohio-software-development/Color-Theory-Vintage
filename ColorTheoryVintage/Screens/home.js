@@ -1,12 +1,11 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { Header } from "react-native-elements";
 import ItemCard from "../component/ItemCard.js"
 import {AppContext} from "../App.js";
 
 
-
-const Home = ({navigation}) => {
+const Home = () => {
   const user = useContext(AppContext);
   return (
     <View >

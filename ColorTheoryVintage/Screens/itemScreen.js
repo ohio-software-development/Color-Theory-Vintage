@@ -1,12 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from "react";
-import { AppContext } from "../App.js";
-import { StyleSheet, Text, View, Image, Pressable, Button, TouchableOpacity} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft } from "react-native-feather";
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import StandardHeader from '../component/StandardHeader.js';
-import MyTabs from '../navigation/tabs.js';
-import UserScreen from './UserScreen.js';
+import { AppContext } from "../App.js";
+
 
 const ItemScreen = () => {
     const navigation = useNavigation();
