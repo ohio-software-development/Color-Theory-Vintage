@@ -9,6 +9,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 const spongebob_picture = require("./assets/spongebob.webp");
 const Red_gem_earings = require("./assets/earings.webp")
 const profile_picture = require("./assets/cat.jpeg");
+import firebaseconfig from "./firebaseconfig";
+import { InitialApp, initializeApp } from "firebase/app"; // validate self
+import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
+
 
 //Create a User and add an Item
 let testUser = new User("Owen Turnbull", "Hi my name is Owen", ["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"], profile_picture);
@@ -19,6 +23,7 @@ testUser.addItem(testItem);
 export const AppContext = createContext();
 
 const MyTheme = {colors: {...DefaultTheme.colors,background: 'white'},};
+initializeApp(firebaseconfig);
 
 const App = () => {
   const [user, setUser] = useState(testUser)
