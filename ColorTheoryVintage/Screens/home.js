@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Header } from "react-native-elements";
 import ItemCard from "../component/ItemCard.js"
 import {AppContext} from "../App.js";
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <View>
           <Text style={{fontSize: 35}}>Your Feed</Text>
       </View>
+      <ScrollView>
       <View style={feedStyles.ColumnContainer}>
         <View style={feedStyles.rowContainer}>
           <ItemCard/>
@@ -36,6 +38,7 @@ const Home = () => {
           />
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 }
@@ -54,7 +57,7 @@ const feedStyles = StyleSheet.create({
     color: 'black',
   },
   image: {
-    width: 200,
+    width: '50%',
     height: 200,
   }
 });

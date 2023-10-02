@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "react-native-elements/dist/config";
 
 const Profile = ({ navigation }) => {
   return (
-    <View style={{ backgroundColor: "white", height: "100%" }}>
+    <SafeAreaView style={{ backgroundColor: "white"}}>
       <View
         style={{
           flexDirection: "row",
@@ -80,7 +81,7 @@ const Profile = ({ navigation }) => {
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-    </View>
+    </SafeAreaView>
   );
 };
 export default Profile;
