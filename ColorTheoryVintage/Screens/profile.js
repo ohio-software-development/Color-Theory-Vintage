@@ -1,9 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "react-native-elements/dist/config";
+import { useNavigation } from '@react-navigation/native';
 
-const Profile = ({ navigation }) => {
+const Profile = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={{ backgroundColor: "white"}}>
       <View
@@ -81,6 +83,7 @@ const Profile = ({ navigation }) => {
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
+      <Button title="Create a new Listing" onPress={() => navigation.push("NewItemScreen")}/>
     </SafeAreaView>
   );
 };

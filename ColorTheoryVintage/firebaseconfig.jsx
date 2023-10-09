@@ -7,3 +7,5 @@ export default {
     appId: "1:71407390369:web:1d8b3687533d83c784aae0",
     measurementId: "G-PCVFPP080M"
   };
+
+  

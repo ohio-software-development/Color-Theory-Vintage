@@ -16,7 +16,7 @@ const Home = () => {
     const func = async () => {
       const storage = getStorage();
       const reference = ref(storage, "/download.jpg");
-      await getDownloadURL(reference).then((x) => {
+      await getDownloadURL(reference).then((x) => { 
         setUrl(x);
       });
     };
@@ -40,7 +40,7 @@ const Home = () => {
         <View style={feedStyles.ColumnContainer}>
           <View style={feedStyles.rowContainer}>
             <ItemCard />
-            <Image
+            {/* <Image
               style={feedStyles.image}
               source={require("../assets/spongebob.webp")}
             />
@@ -63,7 +63,7 @@ const Home = () => {
             <Image
               style={feedStyles.image}
               source={require("../assets/spongebob.webp")}
-            />
+            /> */}
           </View>
         </View>
       </ScrollView>
