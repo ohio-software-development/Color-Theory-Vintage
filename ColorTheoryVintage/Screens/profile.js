@@ -1,10 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "react-native-elements/dist/config";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Profile = ({ navigation }) => {
   return (
-    <View style={{ backgroundColor: "#FFFFFF", height: "100%" }}>
+    <SafeAreaView style={{ backgroundColor: "white"}}>
       <View
         style={{
           flexDirection: "row",
@@ -76,11 +78,56 @@ const Profile = ({ navigation }) => {
       >
         BP-2
       </Text>
+      <Text style= {styles.description}>
+        Welcome to my shop
+      </Text>
       <Text style= {styles.title}>
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-    </View>
+      <ScrollView style={feedStyles.ColumnContainer}>
+        <View style={feedStyles.rowContainer}>
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+          </View>
+          <View style={feedStyles.rowContainer}>
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+        </View>
+        <View style={feedStyles.rowContainer}>
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+        </View>
+        <View style={feedStyles.rowContainer}>
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+          <Image 
+            style={feedStyles.image}
+            source={require("../assets/j-logo.jpeg")}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 export default Profile;
@@ -99,4 +146,33 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
+  description: {
+    fontSize: 14,
+    color: "black",
+    paddingHorizontal: 10,
+    marginTop: 5,
+    marginBottom: 5,
+  }
 });
+
+const feedStyles = StyleSheet.create({
+  ColumnContainer: {
+    flexDirection: 'column',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+  },
+  text: {
+    fontSize: 35,
+    color: 'black',
+  },
+  image: {
+    width: '50%',
+    borderWidth: 1,
+    borderColor: "white",
+    height: 210,
+  }
+});
+
+
+
