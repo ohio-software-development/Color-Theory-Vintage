@@ -3,8 +3,11 @@ import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "react-native-elements/dist/config";
 import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from '@react-navigation/native';
 
-const Profile = ({ navigation }) => {
+
+const Profile = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={{ backgroundColor: "white"}}>
       <View
@@ -127,6 +130,8 @@ const Profile = ({ navigation }) => {
           />
         </View>
       </ScrollView>
+      <Button title="Create a new Listing" onPress={() => navigation.push("NewItemScreen")}/>
+
     </SafeAreaView>
   );
 };

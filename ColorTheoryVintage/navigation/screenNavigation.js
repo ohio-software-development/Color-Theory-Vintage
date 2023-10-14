@@ -6,6 +6,8 @@ import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
 
+import NewItemForm from "../Screens/NewItemForm";
+
 
 const Stack = createStackNavigator();
 
@@ -24,6 +26,10 @@ const HomeScreenNavigator = () => {
         name="UserScreen"
         component={UserScreen}
       />
+      <Stack.Screen
+        name="NewItemScreen"
+        component={NewItemForm}
+        />
     </Stack.Navigator>
   )
 }
@@ -45,6 +51,11 @@ const ExploreScreenNavigator = () => {
         name="UserScreen"
         component={UserScreen}
       />
+
+      <Stack.Screen
+        name="NewItemScreen"
+        component={NewItemForm}
+        />
     </Stack.Navigator>
   )
 }
@@ -67,6 +78,10 @@ const ProfileScreenNavigator = () => {
         name="UserScreen"
         component={UserScreen}
       />
+      <Stack.Screen
+        name="NewItemScreen"
+        component={NewItemForm}
+        />
     </Stack.Navigator>
   )
 }

@@ -6,7 +6,7 @@ import ItemScreen from "./Screens/ItemScreen";
 import User from "./classes/User.js";
 import Item from "./classes/Item.js";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-const spongebob_picture = require("./assets/spongebob.webp");
+const spongebob_picture = require("./assets/images/spongebob.webp");
 const Red_gem_earings = require("./assets/earings.webp")
 const profile_picture = require("./assets/cat.jpeg");
 import firebaseconfig from "./firebaseconfig";
@@ -24,6 +24,7 @@ export const AppContext = createContext();
 
 const MyTheme = {colors: {...DefaultTheme.colors,background: 'white'},};
 initializeApp(firebaseconfig);
+
 
 const App = () => {
   const [user, setUser] = useState(testUser)
