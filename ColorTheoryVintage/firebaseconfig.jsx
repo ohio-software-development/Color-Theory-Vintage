@@ -8,4 +8,3 @@ export default {
     measurementId: "G-PCVFPP080M"
   };
 
-  

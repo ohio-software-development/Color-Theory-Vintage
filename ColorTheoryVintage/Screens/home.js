@@ -16,7 +16,8 @@ const Home = () => {
     const func = async () => {
       const storage = getStorage();
       const reference = ref(storage, "/download.jpg");
-      await getDownloadURL(reference).then((x) => { 
+      await getDownloadURL(reference).then((x) => {
+
         setUrl(x);
       });
     };
@@ -63,7 +64,10 @@ const Home = () => {
             <Image
               style={feedStyles.image}
               source={require("../assets/spongebob.webp")}
+            />
+
             /> */}
+
           </View>
         </View>
       </ScrollView>
@@ -110,3 +114,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+

@@ -5,6 +5,7 @@ import Home from "../Screens/home";
 import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
+
 import NewItemForm from "../Screens/NewItemForm";
 
 
@@ -50,6 +51,7 @@ const ExploreScreenNavigator = () => {
         name="UserScreen"
         component={UserScreen}
       />
+
       <Stack.Screen
         name="NewItemScreen"
         component={NewItemForm}

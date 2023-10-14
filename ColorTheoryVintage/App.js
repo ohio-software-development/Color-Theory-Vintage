@@ -23,7 +23,8 @@ testUser.addItem(testItem);
 export const AppContext = createContext();
 
 const MyTheme = {colors: {...DefaultTheme.colors,background: 'white'},};
-initializeApp(firebaseConfig);
+initializeApp(firebaseconfig);
+
 
 const App = () => {
   const [user, setUser] = useState(testUser)
