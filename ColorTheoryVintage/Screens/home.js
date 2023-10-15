@@ -6,6 +6,7 @@ import { AppContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
+import GetPicture from "../api/getPicture.js";
 
 const Home = () => {
   const user = useContext(AppContext);
@@ -67,7 +68,6 @@ const Home = () => {
             />
 
             /> */}
-
           </View>
         </View>
       </ScrollView>

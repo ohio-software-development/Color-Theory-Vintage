@@ -1,12 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
 
 import ItemScreen from "../Screens/ItemScreen";
-import Home from "../Screens/home";
+import Home from "../Screens/Home";
 import Explore from "../Screens/explore";
-import Profile from "../Screens/profile";
+import Profile from "../Screens/Profile";
 import UserScreen from "../Screens/UserScreen";
 
-import NewItemForm from "../Screens/NewItemForm";
+import NewItem from "../Screens/NewItem";
 
 
 const Stack = createStackNavigator();
@@ -28,7 +28,10 @@ const HomeScreenNavigator = () => {
       />
       <Stack.Screen
         name="NewItemScreen"
-        component={NewItemForm}
+        component={NewItem}
+        options={{
+          tabBarStyle: { display: "none" },
+        }}
         />
     </Stack.Navigator>
   )
@@ -54,7 +57,10 @@ const ExploreScreenNavigator = () => {
 
       <Stack.Screen
         name="NewItemScreen"
-        component={NewItemForm}
+        component={NewItem}
+        options={{
+          tabBarStyle: { display: "none" },
+        }}
         />
     </Stack.Navigator>
   )
@@ -80,7 +86,10 @@ const ProfileScreenNavigator = () => {
       />
       <Stack.Screen
         name="NewItemScreen"
-        component={NewItemForm}
+        component={NewItem}
+        options={{
+          tabBarStyle: { display: "none" },
+        }}
         />
     </Stack.Navigator>
   )
