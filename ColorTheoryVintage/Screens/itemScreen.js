@@ -5,9 +5,7 @@ import StandardHeader from '../component/StandardHeader.js';
 import { AppContext } from "../App.js";
 import { Rating, RatingProps } from '@rneui/themed';
 
-//testing
-console.log("Hello there");
-//testing now
+
 const ItemScreen = () => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
