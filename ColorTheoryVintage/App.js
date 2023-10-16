@@ -2,7 +2,7 @@ import React, {createContext, useState} from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import MyTabs from "./navigation/tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import ItemScreen from "./Screens/ItemScreen";
+import ItemScreen from "./Screens/itemScreen";
 import User from "./classes/User.js";
 import Item from "./classes/Item.js";
 import { SafeAreaProvider } from 'react-native-safe-area-context';

@@ -5,7 +5,6 @@ import StandardHeader from '../component/StandardHeader.js';
 import { AppContext } from "../App.js";
 import { Rating, RatingProps } from '@rneui/themed';
 
-//Want to hide tab navigator at some point
 const ItemScreen = () => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
