@@ -1,9 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore"
-import Item from "../classes/Item";
+import { getFirestore, collection, doc, getDocs, addDoc } from "firebase/firestore"
 
 
-export default function handleNewListing(item, addComplete){
+export function handleNewListing(item, addComplete){
     const db = getFirestore();
     const colRef = collection(db, "Items");
     getDocs(colRef).then((snapshot) => {
@@ -15,8 +13,6 @@ export default function handleNewListing(item, addComplete){
         console.log(snapshot.docs)
     });
 }
-
-test = new Item(price = "50");
 
 
 

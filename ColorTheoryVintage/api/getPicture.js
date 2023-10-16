@@ -47,9 +47,10 @@ export default function getPicture({pictureState, setPictureState}) {
     };
 
     let savePhoto = () => {
-      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-        setPhoto(undefined);
-      });
+    //   MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+    //     setPhoto(undefined);
+    //   });
+    
       setPictureState(photo);
     };
 
