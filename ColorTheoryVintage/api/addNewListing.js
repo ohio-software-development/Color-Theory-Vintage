@@ -1,5 +1,5 @@
 import { getFirestore,  collection, addDoc } from "firebase/firestore"
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { uploadString } from "firebase/storage";
 import {v4} from "uuid";
 
@@ -23,7 +23,7 @@ addNewListing = async (data, photo) => {
     console.log(photo.uri);
     const response = await fetch(photo.uri)
     const bytes = await response.blob();
-    await uploadBytes(storageRef, bytes, metadata).then(() =>{
+    await uploadBytesResumable(storageRef, bytes, metadata).then(() =>{
         alert("image uploaded");
     })
 
