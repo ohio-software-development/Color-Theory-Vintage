@@ -1,6 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-
-import ItemScreen from "../Screens/ItemScreen";
+import ItemScreen from "../Screens/itemScreen";
 import Home from "../Screens/home";
 import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";

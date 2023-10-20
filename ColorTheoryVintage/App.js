@@ -2,14 +2,15 @@ import React, {createContext, useState} from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import MyTabs from "./navigation/tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import ItemScreen from "./Screens/ItemScreen";
+import ItemScreen from "./Screens/itemScreen";
 import User from "./classes/User.js";
 import Item from "./classes/Item.js";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 const spongebob_picture = require("./assets/images/spongebob.webp");
 const Red_gem_earings = require("./assets/earings.webp")
 const profile_picture = require("./assets/cat.jpeg");
-import firebaseconfig from "./firebaseconfig";
+import firebaseConfig from "./firebaseConfig";
+
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 
