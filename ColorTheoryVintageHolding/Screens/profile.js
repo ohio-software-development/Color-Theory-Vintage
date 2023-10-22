@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Image, Button, Alert, TouchableHighlight } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "react-native-elements/dist/config";
 import { ScrollView } from "react-native-gesture-handler";
@@ -84,6 +84,7 @@ const Profile = () => {
       <Text style= {styles.description}>
         Welcome to my shop
       </Text>
+      <Button title={"hello"} onPress={() => navigation.navigate("NewItemScreen")}/>
       <Text style= {styles.title}>
         Gallery
       </Text>

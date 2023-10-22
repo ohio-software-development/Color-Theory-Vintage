@@ -48,13 +48,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width:'100%',
         borderWidth: 1,
-        borderLeftWidth: 0,
-        borderRightWidth:0,
         borderStyle: "solid",
         borderBlockColor: "grey"
     },
     overviewContent:{
-        fontSize: 30,
+        fontSize: 20,
     },
     overviewSubContent:{
         fontSize: 15,
@@ -65,7 +63,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         bottom: 0,
         alignItems: "center",
-        
         width:'100%',
     },
     userInformationContent: {
@@ -84,12 +81,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         borderWidth: 1,
-        borderLeftWidth:0,
-        borderRightWidth:0,
-        
     },
     image:{
-        width: '100%',
+        width: 450,
         height: 415
     }
   })
