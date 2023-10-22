@@ -10,6 +10,7 @@ const Profile = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{ backgroundColor: "white"}}>
+    <ScrollView style={feedStyles.ColumnContainer}>
       <View
         style={{
           flexDirection: "row",
@@ -34,7 +35,7 @@ const Profile = () => {
               fontSize: 20,
               color: "blue",
               paddingHorizontal: 16,
-              marginLeft: 13,
+              marginLeft: 12,
             }}
           >
             9
@@ -50,12 +51,12 @@ const Profile = () => {
               fontSize: 20,
               color: "blue",
               paddingHorizontal: 16,
-              marginLeft: 25,
+              marginLeft: 12,
             }}
           >
             28
           </Text>
-          <Text style={{ fontSize: 20, color: "grey", paddingLeft: 10 }}>
+          <Text style={{ fontSize: 20, color: "grey"}}>
             Followers
           </Text>
         </View>
@@ -66,12 +67,12 @@ const Profile = () => {
               fontSize: 20,
               color: "blue",
               paddingHorizontal: 16,
-              marginLeft: 25,
+              marginLeft: 15,
             }}
           >
             12
           </Text>
-          <Text style={{ fontSize: 20, color: "grey", paddingLeft: 10 }}>
+          <Text style={{ fontSize: 20, color: "grey" }}>
             Following
           </Text>
         </View>
@@ -84,12 +85,12 @@ const Profile = () => {
       <Text style= {styles.description}>
         Welcome to my shop
       </Text>
-      <Button title={"hello"} onPress={() => navigation.navigate("NewItemScreen")}/>
+      <Button title={"Upload"} onPress={() => navigation.navigate("NewItemScreen")}/>
       <Text style= {styles.title}>
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-      <ScrollView style={feedStyles.ColumnContainer}>
+      
         <View style={feedStyles.rowContainer}>
           <Image 
             style={feedStyles.image}
