@@ -25,7 +25,7 @@ const ItemCard = () => {
 
 const styles = StyleSheet.create({
 image: {
-    borderRadius: "25%",
+    borderRadius: 25,
     width: width,
     height:200,
 },
