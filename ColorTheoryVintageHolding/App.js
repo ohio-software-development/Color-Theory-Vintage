@@ -37,9 +37,6 @@ function AuthScreens() {
     </Stack.Navigator>
   );
 }
-
-
-
 const App = () => {
   const [user, setUser] = useState("")
   return (
