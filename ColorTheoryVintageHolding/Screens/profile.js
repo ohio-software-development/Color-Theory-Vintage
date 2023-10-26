@@ -86,6 +86,7 @@ const Profile = () => {
         Welcome to my shop
       </Text>
       <Button title={"Upload"} onPress={() => navigation.navigate("NewItemScreen")}/>
+
       <Text style= {styles.title}>
         Gallery
       </Text>

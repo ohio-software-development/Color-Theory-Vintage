@@ -1,5 +1,5 @@
 export default class User {
-  constructor(name, bio, followers, following, profile_picture) {
+  constructor(name="", bio="", followers=0, following=0, profile_picture=null) {
     this.name = name;
     this.bio = bio;
     this.items = [];
