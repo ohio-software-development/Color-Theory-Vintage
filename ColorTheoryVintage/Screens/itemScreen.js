@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import StandardHeader from '../component/StandardHeader.js';
 import { AppContext } from "../App.js";
+import { Rating, RatingProps } from '@rneui/themed';
 
 
 const ItemScreen = () => {
@@ -19,6 +20,7 @@ const ItemScreen = () => {
             <View style={styles.overview}>
                 <Text style={styles.overviewContent}>{item.brand + " ∙ " + item.catagory}</Text>
                 <Text style={styles.overviewSubContent}>{"Size " + item.size + " ∙ " + item.condition}</Text>
+                <Rating style = {{alignItems: "left"}} showRating fractions="{1}" startingValue="{4.2}" />
             </View>
                 <Pressable style={styles.userInformationDiv} onPress={() => navigation.navigate("UserScreen")} >
                     <Image
@@ -46,11 +48,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width:'100%',
         borderWidth: 1,
+        borderLeftWidth: 0,
+        borderRightWidth:0,
         borderStyle: "solid",
         borderBlockColor: "grey"
     },
     overviewContent:{
-        fontSize: 20,
+        fontSize: 30,
     },
     overviewSubContent:{
         fontSize: 15,
@@ -61,6 +65,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         bottom: 0,
         alignItems: "center",
+        
         width:'100%',
     },
     userInformationContent: {
@@ -79,9 +84,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         borderWidth: 1,
+        borderLeftWidth:0,
+        borderRightWidth:0,
+        
     },
     image:{
-        width: 450,
+        width: '100%',
         height: 415
     }
   })
