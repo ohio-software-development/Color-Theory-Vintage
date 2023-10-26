@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import StandardHeader from '../component/StandardHeader.js';
 import { AppContext } from "../App.js";
-import { Rating, RatingProps } from '@rneui/themed';
 
 
 const ItemScreen = () => {

@@ -9,7 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 const spongebob_picture = require("./assets/images/spongebob.webp");
 const Red_gem_earings = require("./assets/earings.webp")
 const profile_picture = require("./assets/cat.jpeg");
-import firebaseConfig from "./firebaseConfig";
+import firebaseconfig from "./firebaseconfig";
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 import { decode } from 'base-64';
@@ -26,7 +26,7 @@ testUser.addItem(testItem);
 export const AppContext = createContext();
 
 const MyTheme = {colors: {...DefaultTheme.colors,background: 'white'},};
-initializeApp(firebaseConfig);
+initializeApp(firebaseconfig);
 
 
 const App = () => {
