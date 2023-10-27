@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { Header } from "react-native-elements";
 import ItemCard from "../component/ItemCard.js";
 import { AppContext } from "../App.js";
@@ -36,38 +36,15 @@ const Home = () => {
         }}
       />
       <View>
-        <Text style={{ fontSize: 35 }}>Your Feed</Text>
+        <Text h1>Feed</Text>
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
           <View style={feedStyles.rowContainer}>
-            <ItemCard />
-            {/* <Image
-              style={feedStyles.image}
-              source={require("../assets/spongebob.webp")}
-            />
+            <ItemCard/>
           </View>
           <View style={feedStyles.rowContainer}>
-            <Image
-              style={feedStyles.image}
-              source={require("../assets/spongebob.webp")}
-            />
-            <Image
-              style={feedStyles.image}
-              source={require("../assets/spongebob.webp")}
-            />
-          </View>
-          <View style={feedStyles.rowContainer}>
-            <Image
-              style={feedStyles.image}
-              source={{uri:url}}
-            />
-            <Image
-              style={feedStyles.image}
-              source={require("../assets/spongebob.webp")}
-            />
-
-            /> */}
+            <ItemCard/>
           </View>
         </View>
       </ScrollView>
@@ -79,18 +56,14 @@ export default Home;
 const feedStyles = StyleSheet.create({
   ColumnContainer: {
     flexDirection: "column",
+    flex: 1,
   },
   rowContainer: {
     flexDirection: "row",
+    flex: 1,
+    width:100,
   },
-  text: {
-    fontSize: 35,
-    color: "black",
-  },
-  image: {
-    width: "50%",
-    height: 200,
-  },
+
 });
 
 export const headerStyles = StyleSheet.create({
