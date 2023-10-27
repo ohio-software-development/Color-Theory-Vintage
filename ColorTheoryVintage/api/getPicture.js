@@ -37,6 +37,7 @@ export default function getPicture({pictureState, setPictureState}) {
 
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     setPhoto(newPhoto);
+    // console.log(newPhoto); debug
   };
 
   if (photo) {

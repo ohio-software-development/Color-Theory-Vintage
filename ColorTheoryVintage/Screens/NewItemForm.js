@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, Alert } from 'react-native';
+import addNewListing from '../api/addNewListing';
 import StandardHeader from '../component/StandardHeader';
 import GetPicture from '../api/getPicture';
 import { Picker } from '@react-native-picker/picker';
-import { useNavigation } from '@react-navigation/core';
-import { useContext } from 'react';
-import { AppContext } from '../App';
-import { getFirestore,  collection, addDoc, setDoc, doc, arrayUnion, updateDoc } from "firebase/firestore"
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
-import { uploadString } from "firebase/storage";
-import {v4} from "uuid";
 
-
+const newItemCompleted = (data, photo) => {
+  addNewListing(data, photo);
+}
 
 export default NewItem = () => {
-  const navigation = useNavigation();
-  const {user, setUser} = useContext(AppContext);
   const [step, setStep] = useState(1); // Add step state
+
   const [price, setPrice] = useState('');
   const [size, setSize] = useState('');
   const [brand, setBrand] = useState('');
@@ -25,91 +20,29 @@ export default NewItem = () => {
   const [condition, setCondition] = useState('new');
   const [photo, setPhoto] = useState();
 
-  addNewListing = async (data, photo) => {
-    console.log(Object.keys(photo))
-    const db = getFirestore();
-    const listingId = v4();
-    await setDoc(doc(db, "Items", listingId), data)
-        .then((snapshot) => {
-            console.log("uploaded item");
-        })
-        .catch(() => console.log("error"))
-    console.log("this is the user id")
-    console.log(user.id)
-    const userRef = doc(db, "Users", user.id);
-    updateDoc(userRef, {
-      listings: arrayUnion(listingId)
-    })
-    // userRef.update({
-    //     listings: arrayUnion(listingId)
-    // })
-    // .then((snapshot) => {
-    //     console.log("uploaded item to user");
-    // })
-    // .catch(() => console.log("error"))
-  
-    
-    // const colRef = collection(db, "Items");
-    // addDoc(colRef, data).then((snapshot) => {
-    //     console.log("uploaded item");
-    // }).catch(() => console.log("error"));
-  
-  
-    const metadata = {
-        contentType: 'image/jpeg',
-        firebaseStorageDownloadTokens: v4() //In this line you are adding the access token
-      };
-    
-    const storage = getStorage();
-    const storageRef = ref(storage, "/images/brady" + v4() + ".jpeg");
-    console.log(photo.uri);
-    const response = await fetch(photo.uri)
-    const bytes = await response.blob();
-    await uploadBytesResumable(storageRef, bytes, metadata).then(() =>{
-        alert("image uploaded");
-    })
-  
-  
-    // const storage = getStorage();
-    // const response = await fetch(photo.uri)
-    // console.log("HIT");
-    // const blob = await response.blob();
-    // var storageRef = ref(storage, "/images/bradyNew" + v4() + ".jpeg");
-    // alert("image uploaded");
-    // return storageRef.put(blob)
-  
-    // console.log(photo.base64);
-    // const message2 = '5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    // uploadString(storageRef, message2, "base64").then((snapshot) => {
-    //     console.log("photo uploaded")
-    // }).catch(() => console.log("error"));
-  }
-
   const handleStep = () => {
 
     //if completed first step
     if(step == 1 && (type != undefined && brand != undefined)){
       setStep(2);
     }
-    else if((step == 2) == (photo != undefined)){
+    else if((step == 2)){ // photo is defined, just lazy
       setStep(3)
     }
     else if((step == 3) && (price && size)){
       data = {
         "type": type,
-        "brande": brand,
+        "brand": brand,
         "size": size,
         "price": price,
         "description": description,
-        "image": photo.uri
       }
-      addNewListing(data, photo)
-      navigation.navigate("homeScreen");
+      newItemCompleted(data, photo)
     }
     else {
       alert("One of the following fields has not been completed");
     }
-
+  
   };
 
   const updatePhoto = (newValue) => {
@@ -127,7 +60,7 @@ export default NewItem = () => {
               <Picker.Item label="Bracelet" value="bracelet" />
             </Picker>
             <Picker onValueChange={(itemValue) => setBrand(itemValue)}>
-              <Picker.Item label="Gucci" value="prada" />
+              <Picker.Item label="Gucci" value="Gucci" />
               <Picker.Item label="Prada" value="prada" />
             </Picker>
             <Button title={"Next"} onPress={handleStep} />

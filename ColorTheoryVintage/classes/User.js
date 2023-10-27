@@ -1,8 +1,9 @@
 export default class User {
-  constructor(name, bio, followers, following, profile_picture) {
+  constructor(name="", id="", listings=[], bio="", followers=0, following=0, profile_picture=null) {
+    this.id = id
     this.name = name;
     this.bio = bio;
-    this.items = [];
+    this.listings = listings;
     this.currentItemsIndex = 0;
     this.followers = followers;
     this.following = following;
@@ -10,16 +11,17 @@ export default class User {
   }
 
   getCurrentItem(){
-    if((this.items.length) > 0){
-      return this.items[this.currentItemsIndex];
+    console.log(this.listings)
+    if((this.listings.length) > 0){
+      return this.listings[this.currentItemsIndex];
     } else {
       return "";
     }
   }
 
   getNextItem() {
-    if (this.items.length != 0) {
-      result = this.items[this.currentItemsIndex];
+    if (this.listings.length != 0) {
+      result = this.listings[this.currentItemsIndex];
       this.currentItemsIndex++;
       return result;
     }
@@ -29,14 +31,14 @@ export default class User {
     return {
       name: this.name,
       bio: this.bio,
-      items: this.items,
+      items: this.listings,
       followers: this.followers,
       following: this.following
     };
   }
 
   addItem(item) {
-    this.items.push(item);
+    this.listings.push(item);
   }
 
   addFollower(follower) {
@@ -50,7 +52,7 @@ export default class User {
   displayInfo() {
     console.log(`Name: ${this.name}`);
     console.log(`Bio: ${this.bio}`);
-    console.log(`Items: ${this.items}`);
+    console.log(`Items: ${this.listings}`);
     console.log(`Followers: ${this.followers}`);
     console.log(`Following: ${this.following}`);
   }
