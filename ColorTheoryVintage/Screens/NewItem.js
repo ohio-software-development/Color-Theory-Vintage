@@ -122,13 +122,14 @@ export default NewItem = () => {
       return (
         <View style={styles.container}>
           <SafeAreaView>
-            <Picker onValueChange={(itemValue) => setType(itemValue)}>
+            <Picker selectedValue={type}   onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
               <Picker.Item label="Necklace" value="necklace" />
               <Picker.Item label="Bracelet" value="bracelet" />
             </Picker>
-            <Picker onValueChange={(itemValue) => setBrand(itemValue)}>
+            <Picker selectedValue={brand}   onValueChange={(itemValue, itemIndex) => setBrand(itemValue)}>
               <Picker.Item label="Gucci" value="prada" />
               <Picker.Item label="Prada" value="prada" />
+              <Picker.Item label="Other" value="other" />
             </Picker>
             <Button title={"Next"} onPress={handleStep} />
           </SafeAreaView>
