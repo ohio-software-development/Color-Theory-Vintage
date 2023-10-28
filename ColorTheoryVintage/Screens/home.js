@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useFetch, useAsync } from "react-async";
 import { StyleSheet, View, Image, Text } from "react-native";
 import { Header } from "react-native-elements";
 import ItemCard from "../component/ItemCard.js";
@@ -6,24 +7,39 @@ import { AppContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
+import { getFirestore, getDocs, collection, doc } from "firebase/firestore";
 import GetPicture from "../api/getPicture.js";
 
 const Home = () => {
   const user = useContext(AppContext);
-
-  const [url, setUrl] = useState();
+  const db = getFirestore();
+  const [listings, setListings] = useState([]);
+  const [imageUri, setImageUri] = useState(null);
 
   useEffect(() => {
-    const func = async () => {
-      const storage = getStorage();
-      const reference = ref(storage, "/download.jpg");
-      await getDownloadURL(reference).then((x) => {
-
-        setUrl(x);
-      });
+    const fetchData = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "Items"));
+        const listingData = snapshot.docs.map(doc => doc.data());
+        setListings(listingData);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
     };
-    func();
-  });
+    fetchData();
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(listings[0].imageUri);
+        const blob = await response.blob();
+        const uri = URL.createObjectURL(blob);
+        setImageUri(uri);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+    fetchImage();
+  
+  }, [db, listings]);
 
   return (
     <View>
@@ -40,18 +56,20 @@ const Home = () => {
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
+          {listings.map((listing, index) => (
+            <ItemCard key={index} {...listing} />
+          ))}
           <View style={feedStyles.rowContainer}>
-            <ItemCard/>
-          </View>
-          <View style={feedStyles.rowContainer}>
-            <ItemCard/>
+            <Image src={imageUri}/>
           </View>
         </View>
       </ScrollView>
     </View>
   );
 };
+
 export default Home;
+
 
 const feedStyles = StyleSheet.create({
   ColumnContainer: {

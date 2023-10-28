@@ -97,7 +97,7 @@ export default NewItem = () => {
     else if((step == 3) && (price && size)){
       data = {
         "type": type,
-        "brande": brand,
+        "brand": brand,
         "size": size,
         "price": price,
         "description": description,

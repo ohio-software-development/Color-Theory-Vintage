@@ -19,7 +19,6 @@ const Login = () => {
                 userId = userCredential.user.uid
             })
             .catch(() => console.log("sign in rejected"));
-        console.log(userId)
         let userData = await getUser(userId).catch(() => console.log("could not get user data"))
         setUser(new User(userData.name,userId))
     };
