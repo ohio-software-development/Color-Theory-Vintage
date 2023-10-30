@@ -4,6 +4,7 @@ import Home from "../Screens/home";
 import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
+import ExperimentScreen from "../Screens/experimentScreen";
 
 import NewItemForm from "../Screens/NewItemForm";
 
@@ -24,6 +25,10 @@ const HomeScreenNavigator = () => {
       <Stack.Screen
         name="UserScreen"
         component={UserScreen}
+      />
+       <Stack.Screen
+        name="ExperimentScreen"
+        component={ExperimentScreen}
       />
       <Stack.Screen
         name="NewItemScreen"
@@ -49,6 +54,10 @@ const ExploreScreenNavigator = () => {
       <Stack.Screen
         name="UserScreen"
         component={UserScreen}
+      />
+      <Stack.Screen
+        name="ExperimentScreen"
+        component={ExperimentScreen}
       />
 
       <Stack.Screen
@@ -77,12 +86,44 @@ const ProfileScreenNavigator = () => {
         name="UserScreen"
         component={UserScreen}
       />
+       <Stack.Screen
+        name="ExperimentScreen"
+        component={ExperimentScreen}
+      />
       <Stack.Screen
         name="NewItemScreen"
         component={NewItemForm}
         />
+        
     </Stack.Navigator>
   )
 }
 
 export {ProfileScreenNavigator};
+
+
+const ExperimentScreenNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+       <Stack.Screen
+        name="ExperimentScreen"
+        component={ExperimentScreen}
+      />
+      <Stack.Screen
+        name = "ProfileScreen"
+        component={Profile}
+      />
+      <Stack.Screen 
+        name = "ItemScreen"
+        component={ItemScreen}
+      />
+      <Stack.Screen
+        name="NewItemScreen"
+        component={NewItemForm}
+        />
+        
+    </Stack.Navigator>
+  )
+}
+
+export {ExperimentScreenNavigator};
