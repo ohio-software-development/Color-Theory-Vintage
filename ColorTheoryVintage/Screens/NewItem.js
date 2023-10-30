@@ -26,20 +26,6 @@ export default NewItem = () => {
   const [photo, setPhoto] = useState();
 
   addNewListing = async (data, photo) => {
-    console.log(Object.keys(photo))
-    const db = getFirestore();
-    const listingId = v4();
-    await setDoc(doc(db, "Items", listingId), data)
-        .then((snapshot) => {
-            console.log("uploaded item");
-        })
-        .catch(() => console.log("error"))
-    console.log("this is the user id")
-    console.log(user.id)
-    const userRef = doc(db, "Users", user.id);
-    updateDoc(userRef, {
-      listings: arrayUnion(listingId)
-    })
     // userRef.update({
     //     listings: arrayUnion(listingId)
     // })
@@ -65,8 +51,23 @@ export default NewItem = () => {
     console.log(photo.uri);
     const response = await fetch(photo.uri)
     const bytes = await response.blob();
-    await uploadBytesResumable(storageRef, bytes, metadata).then(() =>{
+    await uploadBytesResumable(storageRef, bytes, metadata).then((snapshot) =>{
+      data["image"] = snapshot.ref.name;
         alert("image uploaded");
+    })
+    console.log(Object.keys(photo))
+    const db = getFirestore();
+    const listingId = v4();
+    await setDoc(doc(db, "Items", listingId), data)
+        .then((snapshot) => {
+            console.log("uploaded item");
+        })
+        .catch(() => console.log("error"))
+    console.log("this is the user id")
+    console.log(user.id)
+    const userRef = doc(db, "Users", user.id);
+    updateDoc(userRef, {
+      listings: arrayUnion(listingId)
     })
   
   
@@ -101,7 +102,6 @@ export default NewItem = () => {
         "size": size,
         "price": price,
         "description": description,
-        "image": photo.uri
       }
       addNewListing(data, photo)
       navigation.navigate("homeScreen");

@@ -4,18 +4,19 @@ import { useNavigation } from '@react-navigation/native';
 import { AppContext } from "../App.js";
 
 var width = Dimensions.get('window').width; //full width
-const ItemCard = ({listing}) => {
+const ItemCard = ({listingImage}) => {
+  console.log("this is the listing image");
+  console.log(listingImage)
   const navigation = useNavigation();
   const {user, setUser} = useContext(AppContext);
   
   const ItemCardComponent = () => (
       <Pressable onPress={() => navigation.push("ItemScreen")}>
         <View style={styles.padding}>
-          <Text>whats's up</Text>
-          {/* <Image
+          <Image
             style={styles.image}
-            source={currentItem.srcImage}
-          /> */}
+            source={{uri : listingImage}}
+          />
           {/* <Text>{currentItem.size}</Text>
           <Text>{currentItem.brand}</Text> */}
         </View>

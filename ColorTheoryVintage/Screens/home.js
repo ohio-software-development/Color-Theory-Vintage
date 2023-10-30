@@ -13,10 +13,12 @@ import GetPicture from "../api/getPicture.js";
 const Home = () => {
   const user = useContext(AppContext);
   const db = getFirestore();
+  const storageRef = getStorage();
   const [listings, setListings] = useState([]);
   const [imageUri, setImageUri] = useState(null);
 
   useEffect(() => {
+    if(imageUri != null) {return;}
     const fetchData = async () => {
       try {
         const snapshot = await getDocs(collection(db, "Items"));
@@ -25,14 +27,15 @@ const Home = () => {
       } catch (error) {
         console.error("Error fetching listings:", error);
       }
+      
     };
     fetchData();
+    console.log(listings)
     const fetchImage = async () => {
       try {
-        const response = await fetch(listings[0].imageUri);
-        const blob = await response.blob();
-        const uri = URL.createObjectURL(blob);
-        setImageUri(uri);
+        console.log(listings[0].image)
+        const response = await getDownloadURL(ref(storageRef, "/images/" + listings[0].image));
+        setImageUri(response);
       } catch (error) {
         console.error("Error fetching image:", error);
       }
@@ -40,7 +43,7 @@ const Home = () => {
     fetchImage();
   
   }, [db, listings]);
-
+  console.log(imageUri)
   return (
     <View>
       <Header
@@ -56,9 +59,10 @@ const Home = () => {
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
-          {listings.map((listing, index) => (
+          {/* {listings.map((listing, index) => (
             <ItemCard key={index} {...listing} />
-          ))}
+          ))} */}
+          <ItemCard listingImage={imageUri} />
           <View style={feedStyles.rowContainer}>
             <Image src={imageUri}/>
           </View>

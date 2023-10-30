@@ -19,7 +19,6 @@ const ItemScreen = () => {
             <View style={styles.overview}>
                 <Text style={styles.overviewContent}>{item.brand + " ∙ " + item.catagory}</Text>
                 <Text style={styles.overviewSubContent}>{"Size " + item.size + " ∙ " + item.condition}</Text>
-                <Rating style = {{alignItems: "left"}} showRating fractions="{1}" startingValue="{4.2}" />
             </View>
                 <Pressable style={styles.userInformationDiv} onPress={() => navigation.navigate("UserScreen")} >
                     <Image
