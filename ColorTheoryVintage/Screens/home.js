@@ -15,35 +15,38 @@ const Home = () => {
   const db = getFirestore();
   const storageRef = getStorage();
   const [listings, setListings] = useState([]);
-  const [imageUri, setImageUri] = useState(null);
+  const [imageUris, setImageUris] = useState([]);
 
   useEffect(() => {
-    if(imageUri != null) {return;}
+    if(imageUris.length > 0) {return;}
     const fetchData = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "Items"));
+        const snapshot = await getDocs(collection(db, "Items")).catch(() => console.log("error fetching data"));
         const listingData = snapshot.docs.map(doc => doc.data());
         setListings(listingData);
+        console.log(listings);
       } catch (error) {
         console.error("Error fetching listings:", error);
       }
       
     };
     fetchData();
-    console.log(listings)
     const fetchImage = async () => {
       try {
-        console.log(listings[0].image)
-        const response = await getDownloadURL(ref(storageRef, "/images/" + listings[0].image));
-        setImageUri(response);
+        for(let listing of listings){
+          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.image));
+          setImageUris(imageUris => [...imageUris, response]);
+          console.log("??");
+        }
       } catch (error) {
         console.error("Error fetching image:", error);
       }
+      console.log("this are the image uris")
+      console.log(imageUris)
     };
     fetchImage();
   
   }, [db, listings]);
-  console.log(imageUri)
   return (
     <View>
       <Header
@@ -59,13 +62,10 @@ const Home = () => {
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
-          {/* {listings.map((listing, index) => (
-            <ItemCard key={index} {...listing} />
-          ))} */}
-          <ItemCard listingImage={imageUri} />
-          <View style={feedStyles.rowContainer}>
-            <Image src={imageUri}/>
-          </View>
+          {imageUris.map((uri, index) => (
+            <ItemCard listingImage={uri}/>
+          ))}
+          <ItemCard listingImage={imageUris[0]} />
         </View>
       </ScrollView>
     </View>
