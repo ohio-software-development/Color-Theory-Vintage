@@ -36,13 +36,10 @@ const Home = () => {
         for(let listing of listings){
           const response = await getDownloadURL(ref(storageRef, "/images/" + listing.image));
           setImageUris(imageUris => [...imageUris, response]);
-          console.log("??");
         }
       } catch (error) {
         console.error("Error fetching image:", error);
       }
-      console.log("this are the image uris")
-      console.log(imageUris)
     };
     fetchImage();
   
@@ -65,7 +62,6 @@ const Home = () => {
           {imageUris.map((uri, index) => (
             <ItemCard listingImage={uri}/>
           ))}
-          <ItemCard listingImage={imageUris[0]} />
         </View>
       </ScrollView>
     </View>

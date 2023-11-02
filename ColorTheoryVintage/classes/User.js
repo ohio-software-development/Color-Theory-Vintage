@@ -1,9 +1,15 @@
+import { getDoc, getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getDownloadURL } from "firebase/storage";
+
 export default class User {
   constructor(name="", id="", listings=[], bio="", followers=0, following=0, profile_picture=null) {
+    console.log("these the lisitngs?")
+    console.log(listings);
+    this.listings = listings;
     this.id = id
     this.name = name;
     this.bio = bio;
-    this.listings = listings;
     this.currentItemsIndex = 0;
     this.followers = followers;
     this.following = following;
@@ -11,7 +17,6 @@ export default class User {
   }
 
   getCurrentItem(){
-    console.log(this.listings)
     if((this.listings.length) > 0){
       return this.listings[this.currentItemsIndex];
     } else {

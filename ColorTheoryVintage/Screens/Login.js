@@ -20,7 +20,7 @@ const Login = () => {
             })
             .catch(() => console.log("sign in rejected"));
         let userData = await getUser(userId).catch(() => console.log("could not get user data"))
-        setUser(new User(userData.name,userId))
+        setUser(new User(userData.name,userId, userData.listings))
     };
     const onPressForgotPassword = () => {
     // Do something about forgot password operation

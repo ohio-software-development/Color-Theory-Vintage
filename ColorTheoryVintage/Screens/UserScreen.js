@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from 'react-native';
 import StandardHeader from '../component/StandardHeader';
+import { useFetch, useAsync } from "react-async";
+import { AppContext } from "../App";
 
 const UserScreen = () => {
+  const user = useContext(AppContext);
   return (
     <View style = {styles.container}>
         <StandardHeader/>

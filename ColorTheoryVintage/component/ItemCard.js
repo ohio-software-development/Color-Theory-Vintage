@@ -5,8 +5,6 @@ import { AppContext } from "../App.js";
 
 var width = Dimensions.get('window').width; //full width
 const ItemCard = ({listingImage}) => {
-  console.log("this is the listing image");
-  console.log(listingImage)
   const navigation = useNavigation();
   const {user, setUser} = useContext(AppContext);
   

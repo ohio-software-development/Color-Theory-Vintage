@@ -1,13 +1,70 @@
-import React from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, Button, Alert, TouchableHighlight } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "react-native-elements/dist/config";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
-
+import { AppContext } from "../App";
+import ItemCard from "../component/ItemCard";
+import { collection, getFirestore, getDoc, getDownloadURL, doc } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const Profile = () => {
   const navigation = useNavigation();
+  const {user, setUser} = useContext(AppContext);
+  const [imageUris, setImageUris] = useState([]);
+  const db = getFirestore();
+  const storage = getStorage();
+  
+
+  useEffect(() => {
+    if(imageUris.length > 0) {return;}
+    let listingUrls = [];
+    let listingRef = undefined;
+
+    const fetchListingData = async (listingId) => {
+      try {
+        const listingData = doc(db, "Items", listingId);
+        const docRef = getDoc(listingData).then((snapshot) => console.log(snapshot));
+        return docRef;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    };
+
+    const fetchDownloadUrl = async (listingRef) => {
+      try {
+        return await getDownloadURL(ref(storageRef, "/images/" + listingRef));
+      } catch (error) {
+        console.error("Error fetching download URL:", error);
+        return null;
+      }
+    };
+
+    const fetchAllListingUrls = async () => {
+      console.log(user.listings)
+      for(let i=0; i<user.listings.length; i++){
+        console.log("check 1");
+        listingRef = await fetchListingData(user.listings[i]);
+        console.log(listingRef);
+        if (listingRef) {
+          const downloadUrl = await fetchDownloadUrl(listingRef);
+          console.log("here is the download url");
+          console.log(downloadUrl)
+          if (downloadUrl) {
+            console.log("check 3");
+            listingUrls.push(downloadUrl);
+          }
+        }
+      }
+    };
+
+    fetchAllListingUrls();
+    setImageUris(listingUrls);
+    console.log("hello");
+    console.log(imageUris);
+  })
   return (
     <SafeAreaView style={{ backgroundColor: "white"}}>
     <ScrollView style={feedStyles.ColumnContainer}>
@@ -92,7 +149,7 @@ const Profile = () => {
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
       
-        <View style={feedStyles.rowContainer}>
+        {/* <View style={feedStyles.rowContainer}>
           <Image 
             style={feedStyles.image}
             source={require("../assets/j-logo.jpeg")}
@@ -131,7 +188,11 @@ const Profile = () => {
             style={feedStyles.image}
             source={require("../assets/j-logo.jpeg")}
           />
-        </View>
+        </View> */}
+          {imageUris.map((uri, index) => (
+            <ItemCard listingImage={uri}/>
+          ))}
+          <Text>Hello?</Text>
       </ScrollView>
       <Button title="Create a new Listing" onPress={() => navigation.push("NewItemScreen")}/>
 
