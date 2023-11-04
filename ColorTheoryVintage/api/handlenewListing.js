@@ -2,13 +2,8 @@ import { getFirestore, collection, doc, getDocs, addDoc } from "firebase/firesto
 
 const db = getFirestore();
 
-<<<<<<< HEAD:ColorTheoryVintage/api/handlenewListing.js
-export function handleNewListing(item, addComplete){
-    const db = getFirestore();
-=======
 export default function handleNewListing(item, addComplete){
->>>>>>> React-Native:ColorTheoryVintageHolding/api/handlenewListing.js
-    const colRef = collection(db, "Items");
+    const colRef = collection(db, "Listings");
     getDocs(colRef).then((snapshot) => {
         console.log("hello")
         let items = []

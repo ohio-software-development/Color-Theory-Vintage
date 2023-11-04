@@ -6,10 +6,9 @@ import {v4} from "uuid";
 
 
 addNewListing = async (data, photo) => {
-    console.log(Object.keys(photo))
     const db = getFirestore();
     const listingId = v4();
-    await setDoc(doc(db, "Items", listingId), data)
+    await setDoc(doc(db, "Listings", listingId), data)
         .then((snapshot) => {
             console.log("uploaded item");
         })

@@ -15,16 +15,17 @@ const Home = () => {
   const db = getFirestore();
   const storageRef = getStorage();
   const [listings, setListings] = useState([]);
-  const [imageUris, setImageUris] = useState([]);
+  const [imageURLS, setImageURLS] = useState([]);
 
   useEffect(() => {
-    if(imageUris.length > 0) {return;}
+    if(imageURLS.length > 0) return;
     const fetchData = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "Items")).catch(() => console.log("error fetching data"));
+        const snapshot = await getDocs(collection(db, "Listings")).catch(() => {console.log("error fetching data"); return});
         const listingData = snapshot.docs.map(doc => doc.data());
+        // console.log("this is the listing data");
+        // console.log(listingData)
         setListings(listingData);
-        console.log(listings);
       } catch (error) {
         console.error("Error fetching listings:", error);
       }
@@ -34,8 +35,8 @@ const Home = () => {
     const fetchImage = async () => {
       try {
         for(let listing of listings){
-          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.image));
-          setImageUris(imageUris => [...imageUris, response]);
+          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
+          setImageURLS(imageURLS => [...imageURLS, response]);
         }
       } catch (error) {
         console.error("Error fetching image:", error);
@@ -59,8 +60,8 @@ const Home = () => {
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
-          {imageUris.map((uri, index) => (
-            <ItemCard listingImage={uri}/>
+          {imageURLS.map((uri, index) => (
+            <ItemCard key={index} listingImage={uri}/>
           ))}
         </View>
       </ScrollView>

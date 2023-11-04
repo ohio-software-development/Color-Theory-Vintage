@@ -52,13 +52,13 @@ export default NewItem = () => {
     const response = await fetch(photo.uri)
     const bytes = await response.blob();
     await uploadBytesResumable(storageRef, bytes, metadata).then((snapshot) =>{
-      data["image"] = snapshot.ref.name;
+      data["imageRef"] = snapshot.ref.name;
         alert("image uploaded");
     })
     console.log(Object.keys(photo))
     const db = getFirestore();
     const listingId = v4();
-    await setDoc(doc(db, "Items", listingId), data)
+    await setDoc(doc(db, "Listings", listingId), data)
         .then((snapshot) => {
             console.log("uploaded item");
         })

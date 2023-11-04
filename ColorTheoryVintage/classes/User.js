@@ -4,8 +4,6 @@ import { getDownloadURL } from "firebase/storage";
 
 export default class User {
   constructor(name="", id="", listings=[], bio="", followers=0, following=0, profile_picture=null) {
-    console.log("these the lisitngs?")
-    console.log(listings);
     this.listings = listings;
     this.id = id
     this.name = name;

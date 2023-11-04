@@ -9,8 +9,8 @@ import User from '../classes/User';
 const Login = () => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("ows8turnbull@gmail.com");
+    const [password, setPassword] = useState("vYxdu2-xobfif-sosbyr");
     const onPressLogin = async () => {
         const auth = getAuth()
         let userId = ""
@@ -22,6 +22,8 @@ const Login = () => {
         let userData = await getUser(userId).catch(() => console.log("could not get user data"))
         setUser(new User(userData.name,userId, userData.listings))
     };
+    //uncomment if you want auto login
+    if(email && password){onPressLogin()}
     const onPressForgotPassword = () => {
     // Do something about forgot password operation
     };
