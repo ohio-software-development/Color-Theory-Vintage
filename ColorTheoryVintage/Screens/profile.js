@@ -17,35 +17,6 @@ const Profile = () => {
   const storageRef = getStorage();
   const [listings, setListings] = useState([]);
 
-  // useEffect(() => {
-  //   if(imageURLS.length > 0) return;
-  //   const fetchData = async () => {
-  //     try {
-  //       const snapshot = await getDocs(collection(db, "Listings")).catch(() => {console.log("error fetching data"); return});
-  //       const listingData = snapshot.docs.map(doc => doc.data());
-  //       // console.log("this is the listing data");
-  //       // console.log(listingData)
-  //       setListings(listingData);
-  //     } catch (error) {
-  //       console.error("Error fetching listings:", error);
-  //     }
-      
-  //   };
-  //   fetchData();
-  //   const fetchImage = async () => {
-  //     try {
-  //       for(let listing of listings){
-  //         const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
-  //         setImageURLS(imageURIS => [...imageURIS, response]);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching image:", error);
-  //     }
-  //   };
-  //   fetchImage();
-  
-  // }, [db, listings])
-
   useEffect(() => {
     if (imageURLS.length > 0) return;
   
@@ -80,6 +51,43 @@ const Profile = () => {
     }
   }, [db, imageURLS, listings, storageRef, user.listings]);
   
+
+  useEffect(() => {
+  //   //for each listing reference in the users.listings
+  //   // get the image reference from "Listings" >> listing reference.imageURI
+  //   //getDownloadURL(image reference)
+  //   //add image url to listingURLS
+  //   //setimageURLS()
+    if(imageURLS.length > 0) return;
+    const fetchData = async () => {
+      try {
+        for(listing of user.listings){
+          const snapshot = await getDoc(doc(db, "Listings", listing)).catch(() => console.log("error fetching data")).catch(() => {console.log("error fetching data"); return});
+          const reference = snapshot.data().imageRef;
+          console.log(reference)
+          setListings(listings => [...listings, reference]);
+          // console.log(listings);
+        }
+      fetchImage();
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+      
+    };
+    fetchData();
+    const fetchImage = async () => {
+      try {
+        for (let listing of listings) {
+          console.log("here is the listing path");
+          console.log(listing);
+          const response = await getDownloadURL(ref(storageRef, "/images/" + listing));
+          setImageURLS(imageURLs => [...imageURLs, response]);
+        }
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+  }, [db, imageURLS])
   return (
     <SafeAreaView style={{ backgroundColor: "white"}}>
     <ScrollView style={feedStyles.ColumnContainer}>
@@ -203,9 +211,9 @@ const Profile = () => {
             source={require("../assets/j-logo.jpeg")}
           />
         </View> */}
-          {imageURLS.map((uri, index) => (
+          {/* {imageURLS.map((uri, index) => (
             <ItemCard key={index} listingImage={uri}/>
-          ))}
+          ))} */}
           <Text>Hello?</Text>
       </ScrollView>
       <Button title="Create a new Listing" onPress={() => navigation.push("NewItemScreen")}/>
