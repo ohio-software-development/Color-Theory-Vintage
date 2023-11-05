@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import ItemScreen from "../Screens/itemScreen";
+import ListingScreen from "../Screens/ListingScreen";
 import Home from "../Screens/home";
 import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
@@ -18,15 +18,16 @@ const HomeScreenNavigator = () => {
         component={Home}
       />
       <Stack.Screen 
-        name = "ItemScreen"
-        component={ItemScreen}
+        name = "ListingScreen"
+        component={ListingScreen}
+        rout
       />
       <Stack.Screen
         name="UserScreen"
         component={UserScreen}
       />
       <Stack.Screen
-        name="NewItemScreen"
+        name="NewListingScreen"
         component={NewItem}
         options={{
           tabBarStyle: { display: "none" },
@@ -46,8 +47,8 @@ const ExploreScreenNavigator = () => {
         component={Explore}
       />
       <Stack.Screen 
-        name = "ItemScreen"
-        component={ItemScreen}
+        name = "ListingScreen"
+        component={ListingScreen}
       />
       <Stack.Screen
         name="UserScreen"
@@ -55,7 +56,7 @@ const ExploreScreenNavigator = () => {
       />
 
       <Stack.Screen
-        name="NewItemScreen"
+        name="NewListingScreen"
         component={NewItem}
         options={{
           tabBarStyle: { display: "none" },
@@ -76,15 +77,15 @@ const ProfileScreenNavigator = () => {
         component={Profile}
       />
       <Stack.Screen 
-        name = "ItemScreen"
-        component={ItemScreen}
+        name = "ListingScreen"
+        component={ListingScreen}
       />
       <Stack.Screen
         name="UserScreen"
         component={UserScreen}
       />
       <Stack.Screen
-        name="NewItemScreen"
+        name="NewListingScreen"
         component={NewItem}
         options={{
           tabBarStyle: { display: "none" },

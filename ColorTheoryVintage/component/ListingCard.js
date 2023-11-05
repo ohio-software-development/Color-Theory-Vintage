@@ -4,23 +4,22 @@ import { useNavigation } from '@react-navigation/native';
 import { AppContext } from "../App.js";
 
 // var width = Dimensions.get('window').width; //full width
-const ItemCard = ({listingImage}) => {
+const ListingCard = ({listing, listingURL}) => {
   const navigation = useNavigation();
-  const {user, setUser} = useContext(AppContext);
-  
-  const ItemCardComponent = () => (
-      <Pressable onPress={() => navigation.push("ItemScreen")}>
+  const {user, setUser} = useContext(AppContext); 
+  const ListingCardComponent = () => (
+      <Pressable onPress={() => navigation.push("ListingScreen", { listing, listingURL })}>
         <View style={styles.padding}>
           <Image
             style={styles.image}
-            source={{uri : listingImage}}
+            source={{uri : listingURL}}
           />
           {/* <Text>{currentItem.size}</Text>
           <Text>{currentItem.brand}</Text> */}
         </View>
       </Pressable>
     );
-    return ItemCardComponent();
+    return ListingCardComponent();
 }
 
 const styles = StyleSheet.create({
@@ -35,4 +34,4 @@ padding:{
 
 });
 
-export default ItemCard;
+export default ListingCard;

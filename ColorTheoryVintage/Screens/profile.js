@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from "../App";
-import ItemCard from "../component/ItemCard";
+import ListingCard from "../component/ListingCard";
 import { getDownloadURL, getStorage, ref} from 'firebase/storage';
 import { collection, getFirestore, getDoc, getDocs,doc } from "firebase/firestore";
 
@@ -185,11 +185,11 @@ const Profile = () => {
           />
         </View> */}
           {imageURLS.map((uri, index) => (
-            <ItemCard key={index} listingImage={uri}/>
+            <ListingCard key={index} listingImage={uri}/>
           ))}
           <Text>Hello?</Text>
       </ScrollView>
-      <Button title="Create a new Listing" onPress={() => navigation.push("NewItemScreen")}/>
+      <Button title="Create a new Listing" onPress={() => navigation.push("NewListingScreen")}/>
 
     </SafeAreaView>
   );

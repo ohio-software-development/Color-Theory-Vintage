@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useFetch, useAsync } from "react-async";
 import { StyleSheet, View, Image, Text } from "react-native";
 import { Header } from "react-native-elements";
-import ItemCard from "../component/ItemCard.js";
+import ListingCard from "../component/ListingCard.js";
 import { AppContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
@@ -60,8 +60,8 @@ const Home = () => {
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
-          {imageURLS.map((uri, index) => (
-            <ItemCard key={index} listingImage={uri}/>
+          {listings.map((listing, i) => (
+            <ListingCard key={i} listing={listing} listingURL={imageURLS[i]} />
           ))}
         </View>
       </ScrollView>
