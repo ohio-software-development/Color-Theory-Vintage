@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useFetch, useAsync } from "react-async";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
 import { Header } from "react-native-elements";
 import ListingCard from "../component/ListingCard.js";
 import { AppContext } from "../App.js";
@@ -10,6 +10,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 import { getFirestore, getDocs, collection, doc } from "firebase/firestore";
 import GetPicture from "../api/getPicture.js";
 
+var width = Dimensions.get('window').width/2; //full width
 const Home = () => {
   const user = useContext(AppContext);
   const db = getFirestore();
@@ -56,13 +57,23 @@ const Home = () => {
         }}
       />
       <View>
-        <Text h1>Feed</Text>
+        <Text style={{fontSize: 24}}>Feed</Text>
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
-          {listings.map((listing, i) => (
-            <ListingCard key={i} listing={listing} listingURL={imageURLS[i]} />
-          ))}
+          {listings.map((listing, i) => {
+            {/*create new row for every two columns and also make sure that there are at least two items */}
+            if (i % 2 === 0 && listings[i + 1]) {
+              return (
+                <View style={feedStyles.rowContainer} key={i}>
+                  <ListingCard styles={styles.images} listing={listings[i]} listingURL={imageURLS[i]} />
+                  <ListingCard styles={styles.images} listing={listings[i + 1]} listingURL={imageURLS[i + 1]} />
+                </View>
+              );
+            } else {
+              return null; // Render nothing if there are no two consecutive listings available
+            }
+          })}
         </View>
       </ScrollView>
     </View>
@@ -100,6 +111,16 @@ export const headerStyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
+  images: {
+    image: {
+      borderRadius: 25,
+      width: width,
+      height:200,
+    },
+    padding:{
+      paddingBottom:10,
+    }
+  },
   container: {
     flex: 1,
     alignItems: "center",

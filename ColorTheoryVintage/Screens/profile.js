@@ -25,7 +25,7 @@ const Profile = () => {
         const updatedListings = [];
         for (let listing of user.listings) {
           const snapshot = await getDoc(doc(db, "Listings", listing));
-          const reference = snapshot.data().imageRef;
+          const reference = snapshot.data();
           updatedListings.push(reference);
         }
         setListings(updatedListings);
@@ -44,7 +44,7 @@ const Profile = () => {
       try {
         const updatedImageURLS = [];
         for (let listing of listings) {
-          const response = await getDownloadURL(ref(storageRef, "/images/" + listing));
+          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
           updatedImageURLS.push(response);
         }
         setImageURLS(updatedImageURLS);
@@ -143,50 +143,9 @@ const Profile = () => {
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-      
-        {/* <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          </View>
-          <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-        </View>
-        <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-        </View>
-        <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-        </View> */}
-          {imageURLS.map((uri, index) => (
-            <ListingCard key={index} listingImage={uri}/>
-          ))}
+          {/* {listings.map((l, i) => (
+            <ListingCard key={i} listing={l} listingURL={imageURLS[i]}/>
+          ))} */}
           <Text>Hello?</Text>
       </ScrollView>
       <Button title="Create a new Listing" onPress={() => navigation.push("NewListingScreen")}/>

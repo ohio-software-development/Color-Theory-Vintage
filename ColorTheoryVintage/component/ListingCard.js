@@ -3,13 +3,12 @@ import { StyleSheet, Text, View, Image, Pressable, Dimensions} from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from "../App.js";
 
-// var width = Dimensions.get('window').width; //full width
-const ListingCard = ({listing, listingURL}) => {
+const ListingCard = ({styles, listing, listingURL}) => {
   const navigation = useNavigation();
   const {user, setUser} = useContext(AppContext); 
   const ListingCardComponent = () => (
       <Pressable onPress={() => navigation.push("ListingScreen", { listing, listingURL })}>
-        <View style={styles.padding}>
+        <View>
           <Image
             style={styles.image}
             source={{uri : listingURL}}
@@ -21,17 +20,5 @@ const ListingCard = ({listing, listingURL}) => {
     );
     return ListingCardComponent();
 }
-
-const styles = StyleSheet.create({
-image: {
-    borderRadius: 25,
-    width: 150,
-    height:150,
-},
-padding:{
-  paddingBottom:10,
-}
-
-});
 
 export default ListingCard;
