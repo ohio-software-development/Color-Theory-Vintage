@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { StyleSheet, Text, View, Image, Button, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,7 @@ import { getDownloadURL, getStorage, ref} from 'firebase/storage';
 import { collection, getFirestore, getDoc, getDocs,doc } from "firebase/firestore";
 
 
+var width = Dimensions.get('window').width/2; //full width
 const Profile = () => {
   const navigation = useNavigation();
   const {user, setUser} = useContext(AppContext);
@@ -143,10 +144,21 @@ const Profile = () => {
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-          {/* {listings.map((l, i) => (
-            <ListingCard key={i} listing={l} listingURL={imageURLS[i]}/>
-          ))} */}
-          <Text>Hello?</Text>
+          <View style={feedStyles.ColumnContainer}>
+            {listings.map((listing, i) => {
+              {/*create new row for every two columns and also make sure that there are at least two items */}
+              if (i % 2 === 0 && listings[i + 1]) {
+                return (
+                  <View style={feedStyles.rowContainer} key={i}>
+                    <ListingCard styles={styles.images} listing={listings[i]} listingURL={imageURLS[i]} />
+                    <ListingCard styles={styles.images} listing={listings[i + 1]} listingURL={imageURLS[i + 1]} />
+                  </View>
+                );
+              } else {
+                return null; // Render nothing if there are no two consecutive listings available
+              }
+            })}
+          </View>
       </ScrollView>
       <Button title="Create a new Listing" onPress={() => navigation.push("NewListingScreen")}/>
 
@@ -156,6 +168,16 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
+  images: {
+    image: {
+      borderRadius: 25,
+      width: width,
+      height: 200,
+    },
+    padding:{
+      paddingBottom:10,
+    }
+  },
   container: {
     flex: 1,
     alignItems: "center",

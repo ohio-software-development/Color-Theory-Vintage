@@ -11,6 +11,7 @@ import { getFirestore, getDocs, collection, doc } from "firebase/firestore";
 import GetPicture from "../api/getPicture.js";
 
 var width = Dimensions.get('window').width/2; //full width
+console.log(width)
 const Home = () => {
   const user = useContext(AppContext);
   const db = getFirestore();
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     image: {
       borderRadius: 25,
       width: width,
-      height:200,
+      height: 200,
     },
     padding:{
       paddingBottom:10,

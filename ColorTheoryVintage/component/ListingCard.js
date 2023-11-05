@@ -6,7 +6,6 @@ import { AppContext } from "../App.js";
 const ListingCard = ({styles, listing, listingURL}) => {
   const navigation = useNavigation();
   const {user, setUser} = useContext(AppContext); 
-  console.log("bruh")
   const ListingCardComponent = () => (
       <Pressable onPress={() => navigation.push("ListingScreen", { listing, listingURL })}>
         <View>
