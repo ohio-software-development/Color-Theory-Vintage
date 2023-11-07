@@ -4,95 +4,80 @@ import Home from "../Screens/home";
 import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
+import ExperimentScreen from "../Screens/experimentScreen";
 
 import NewItem from "../Screens/NewItem";
 
+import NewItemForm from "../Screens/NewItemForm";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const HomeScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name = "homeScreen"
-        component={Home}
-      />
-      <Stack.Screen 
-        name = "ListingScreen"
-        component={ListingScreen}
-        rout
-      />
-      <Stack.Screen
-        name="UserScreen"
-        component={UserScreen}
-      />
-      <Stack.Screen
-        name="NewListingScreen"
-        component={NewItem}
-        options={{
-          tabBarStyle: { display: "none" },
-        }}
-        />
+      <Stack.Screen name="homeScreen" component={Home} />
+      <Stack.Screen name="ItemScreen" component={ItemScreen} />
+      <Stack.Screen name="UserScreen" component={UserScreen} />
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="NewItemScreen" component={NewItemForm} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export {HomeScreenNavigator};
+export { HomeScreenNavigator };
+
+const HomeDrawerNavigator = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Color Theory Vintage" component={Home} options={{headerShown: false}} />
+      {/* Add other screens here */}
+    </Drawer.Navigator>
+  );
+};
+export { HomeDrawerNavigator };
 
 const ExploreScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name = "ExploreScreen"
-        component={Explore}
-      />
-      <Stack.Screen 
-        name = "ListingScreen"
-        component={ListingScreen}
-      />
-      <Stack.Screen
-        name="UserScreen"
-        component={UserScreen}
-      />
 
-      <Stack.Screen
-        name="NewListingScreen"
-        component={NewItem}
-        options={{
-          tabBarStyle: { display: "none" },
-        }}
-        />
+      <Stack.Screen name="ExploreScreen" component={Explore} />
+      <Stack.Screen name="ItemScreen" component={ItemScreen} />
+      <Stack.Screen name="UserScreen" component={UserScreen} />
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+
+      <Stack.Screen name="NewItemScreen" component={NewItemForm} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export {ExploreScreenNavigator};
-
+export { ExploreScreenNavigator };
 
 const ProfileScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name = "ProfileScreen"
-        component={Profile}
-      />
-      <Stack.Screen 
-        name = "ListingScreen"
-        component={ListingScreen}
-      />
-      <Stack.Screen
-        name="UserScreen"
-        component={UserScreen}
-      />
-      <Stack.Screen
-        name="NewListingScreen"
-        component={NewItem}
-        options={{
-          tabBarStyle: { display: "none" },
-        }}
-        />
+      <Stack.Screen name="ProfileScreen" component={Profile} />
+      <Stack.Screen name="ItemScreen" component={ItemScreen} />
+      <Stack.Screen name="UserScreen" component={UserScreen} />
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="NewItemScreen" component={NewItemForm} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export {ProfileScreenNavigator};
+export { ProfileScreenNavigator };
+
+const ExperimentScreenNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="ProfileScreen" component={Profile} />
+      <Stack.Screen name="ItemScreen" component={ItemScreen} />
+      <Stack.Screen name="NewItemScreen" component={NewItemForm} />
+    </Stack.Navigator>
+  );
+};
+
+export { ExperimentScreenNavigator };
