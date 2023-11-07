@@ -12,6 +12,12 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons8 from "../assets/icons8-message.gif";
 import waitingMessage from "../assets/icons8-message-50.png";
+import {ArrowLeft} from "react-native-feather";
+import { useNavigation } from '@react-navigation/native';
+
+
+import { Header } from "react-native-elements";
+
 const ExperimentScreen = () => {
   callsData = [
     {
@@ -155,10 +161,21 @@ const ExperimentScreen = () => {
       </TouchableOpacity>
     );
   };
+  const navigation = useNavigation();
 
   return (
-
-      <SafeAreaView style={{ flex: 1 }}>
+    
+      <View style={{ flex: 1 }}>
+            <Header
+        containerStyle={headerStyles.headerContainer}
+        leftComponent={<ArrowLeft
+          onPress={ () =>  navigation.navigate("Home")}
+              title="Back"/> }
+        centerComponent={{
+          text: "Color Theory Vintage!",
+          style: headerStyles.headerText,
+        }}
+      />
         <FlatList
           extraData={calls}
           data={calls}
@@ -167,11 +184,25 @@ const ExperimentScreen = () => {
           }}
           renderItem={renderItem}
         />
-      </SafeAreaView>
+      </View>
    
   );
 };
 export default ExperimentScreen;
+
+export const headerStyles = StyleSheet.create({
+  headerContainer: {
+    backgroundColor: "white",
+    borderBottomWidth: 0, // Removes the border at the bottom of the header
+  },
+  headerText: {
+    color: "black",
+    fontSize: 20,
+  },
+  menuIcon: {
+    color: "black",
+  },
+});
 
 const styles = StyleSheet.create({
   row: {
