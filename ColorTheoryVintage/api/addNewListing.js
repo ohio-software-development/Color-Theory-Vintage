@@ -1,16 +1,33 @@
-import { getFirestore,  collection, addDoc } from "firebase/firestore"
+import { getFirestore,  collection, addDoc, setDoc, doc, arrayUnion } from "firebase/firestore"
 import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { uploadString } from "firebase/storage";
+import { useContext } from "react";
 import {v4} from "uuid";
 
 
 addNewListing = async (data, photo) => {
-    console.log(Object.keys(photo))
     const db = getFirestore();
-    const colRef = collection(db, "Items");
-    addDoc(colRef, data).then((snapshot) => {
+    const listingId = v4();
+    await setDoc(doc(db, "Listings", listingId), data)
+        .then((snapshot) => {
+            console.log("uploaded item");
+        })
+        .catch(() => console.log("error"))
+    const userRef = collection(db ,"Users").doc(user.id);
+    userRef.update({
+        listings: arrayUnion(listingId)
+    })
+    .then((snapshot) => {
         console.log("uploaded item");
-    }).catch(() => console.log("error"));
+    })
+    .catch(() => console.log("error"))
+    userRef.set()
+
+    
+    // const colRef = collection(db, "Items");
+    // addDoc(colRef, data).then((snapshot) => {
+    //     console.log("uploaded item");
+    // }).catch(() => console.log("error"));
 
 
     const metadata = {

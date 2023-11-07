@@ -1,13 +1,67 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, Button, Alert, TouchableHighlight } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import { StyleSheet, Text, View, Image, Button, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { fonts } from "react-native-elements/dist/config";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
+import { AppContext } from "../App";
+import ListingCard from "../component/ListingCard";
+import { getDownloadURL, getStorage, ref} from 'firebase/storage';
+import { collection, getFirestore, getDoc, getDocs,doc } from "firebase/firestore";
 
 
+var width = Dimensions.get('window').width/2; //full width
 const Profile = () => {
   const navigation = useNavigation();
+  const {user, setUser} = useContext(AppContext);
+  const [imageURLS, setImageURLS] = useState([]);
+  const db = getFirestore();
+  const storageRef = getStorage();
+  const [listings, setListings] = useState([]);
+
+  useEffect(() => {
+    if (user.listings.length === 0) return;
+
+    const fetchData = async () => {
+      try {
+        const updatedListings = [];
+        for (let listing of user.listings) {
+          const snapshot = await getDoc(doc(db, "Listings", listing));
+          const reference = snapshot.data();
+          updatedListings.push(reference);
+        }
+        setListings(updatedListings);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+    };
+
+    fetchData();
+  }, [db, user.listings]);
+
+  useEffect(() => {
+    if (listings.length === 0) return;
+
+    const fetchImage = async () => {
+      try {
+        const updatedImageURLS = [];
+        for (let listing of listings) {
+          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
+          updatedImageURLS.push(response);
+        }
+        setImageURLS(updatedImageURLS);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+
+    fetchImage();
+  }, [listings]);
+
+  // console.log("completed data fetch");
+  // console.log(listings);
+  // console.log(imageURLS);
+  // console.log("these are the updated image urls");
+  // console.log(imageURLS);
   return (
     <SafeAreaView style={{ backgroundColor: "white"}}>
     <ScrollView style={feedStyles.ColumnContainer}>
@@ -85,55 +139,28 @@ const Profile = () => {
       <Text style= {styles.description}>
         Welcome to my shop
       </Text>
-      <Button title={"Upload"} onPress={() => navigation.navigate("NewItemScreen")}/>
 
       <Text style= {styles.title}>
         Gallery
       </Text>
       <View style = {{borderWidth: StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-      
-        <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
+          <View style={feedStyles.ColumnContainer}>
+            {listings.map((listing, i) => {
+              {/*create new row for every two columns and also make sure that there are at least two items */}
+              if (i % 2 === 0 && listings[i + 1]) {
+                return (
+                  <View style={feedStyles.rowContainer} key={i}>
+                    <ListingCard styles={styles.images} listing={listings[i]} listingURL={imageURLS[i]} />
+                    <ListingCard styles={styles.images} listing={listings[i + 1]} listingURL={imageURLS[i + 1]} />
+                  </View>
+                );
+              } else {
+                return null; // Render nothing if there are no two consecutive listings available
+              }
+            })}
           </View>
-          <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-        </View>
-        <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-        </View>
-        <View style={feedStyles.rowContainer}>
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-          <Image 
-            style={feedStyles.image}
-            source={require("../assets/j-logo.jpeg")}
-          />
-        </View>
       </ScrollView>
-      <Button title="Create a new Listing" onPress={() => navigation.push("NewItemScreen")}/>
+      <Button title="Create a new Listing" onPress={() => navigation.push("NewListingScreen")}/>
 
     </SafeAreaView>
   );
@@ -141,6 +168,16 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
+  images: {
+    image: {
+      borderRadius: 25,
+      width: width,
+      height: 200,
+    },
+    padding:{
+      paddingBottom:10,
+    }
+  },
   container: {
     flex: 1,
     alignItems: "center",

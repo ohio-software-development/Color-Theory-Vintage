@@ -3,24 +3,29 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import StandardHeader from '../component/StandardHeader.js';
 import { AppContext } from "../App.js";
-import { Rating, RatingProps } from '@rneui/themed';
 
 
-const ItemScreen = () => {
+const ListingScreen = ({route}) => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
-    const item = user.getCurrentItem();
+    const listing = route.params;
+    const listingURL = route.params
+    console.log("here the listings yo")
+    console.log(listing)
+    console.log(listingURL)
+    console.log(listing.listingURL)
+    console.log(Object.keys(listing.listing.price))
     return (
         <View style={styles.container}>
             <StandardHeader/>
             <Image
                 style = {styles.image} 
-                source={item.srcImage}
+                source={{uri: listing.listingURL}}
             />
             <View style={styles.overview}>
-                <Text style={styles.overviewContent}>{item.brand + " ∙ " + item.catagory}</Text>
-                <Text style={styles.overviewSubContent}>{"Size " + item.size + " ∙ " + item.condition}</Text>
-                <Rating style = {{alignItems: "left"}} showRating fractions="{1}" startingValue="{4.2}" />
+                <Text style={styles.overviewContent}>{listing.listing.brand + " ∙ " + listing.listing.catagory}</Text>
+                <Text style={styles.overviewSubContent}>{"Size " + listing.listing.size + " ∙ " + listing.listing.condition}</Text>
+                <Text style={styles.overviewSubContent}>{"Price" + listing.listing.price + " ∙ " + listing.listing.condition}</Text>
             </View>
                 <Pressable style={styles.userInformationDiv} onPress={() => navigation.navigate("UserScreen")} >
                     <Image
@@ -31,7 +36,7 @@ const ItemScreen = () => {
                 </Pressable>
                 <View style={styles.descriptionContainer}>
                     <Text style={{fontWeight: "bold", marginLeft: 10}}>{user.name}</Text>
-                    <Text style ={{marginLeft: 5}}>{item.description}</Text>
+                    <Text style ={{marginLeft: 5}}>{listing.listing.description}</Text>
                 </View>
         </View>
     );
@@ -40,7 +45,7 @@ const ItemScreen = () => {
 const styles = StyleSheet.create({
     container:{
         backgroundColor: 'white',
-        alignItems:'center',
+        alignlistings:'center',
         justifyContent:'center',
     },
     overview:{
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: 10,
         bottom: 0,
-        alignItems: "center",
+        alignlistings: "center",
         
         width:'100%',
     },
@@ -94,4 +99,4 @@ const styles = StyleSheet.create({
     }
   })
 
-export default ItemScreen;
+export default ListingScreen;
