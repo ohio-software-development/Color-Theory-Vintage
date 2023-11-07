@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useFetch, useAsync } from "react-async";
 import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
+import {MessageCircle, Menu } from "react-native-feather";
 import { Header } from "react-native-elements";
 import ListingCard from "../component/ListingCard.js";
 import { AppContext } from "../App.js";
@@ -9,11 +10,14 @@ import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 import { getFirestore, getDocs, collection, doc } from "firebase/firestore";
 import GetPicture from "../api/getPicture.js";
+import { createDrawerNavigator} from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 
 var width = Dimensions.get('window').width/2; //full width
 console.log(width)
 const Home = () => {
   const user = useContext(AppContext);
+  const navigation = useNavigation(); // Use useNavigation to get the navigation object
   const db = getFirestore();
   const storageRef = getStorage();
   const [listings, setListings] = useState([]);
@@ -51,7 +55,14 @@ const Home = () => {
     <View>
       <Header
         containerStyle={headerStyles.headerContainer}
-        leftComponent={{ icon: "menu", color: headerStyles.menuIcon.color }}
+        leftComponent={<Menu
+              onPress={() => navigation.toggleDrawer()}
+              title="Side Panel"/> }
+        rightComponent={
+         <MessageCircle
+              onPress={() => navigation.navigate('ExperimentScreen')}
+              title="Message"/> 
+        }
         centerComponent={{
           text: "Color Theory Vintage!",
           style: headerStyles.headerText,
@@ -128,4 +139,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-

@@ -19,9 +19,9 @@ if(typeof atob === 'undefined') {
 }
 
 //Create a User and add an Item
-let testUser = new User("Owen Turnbull", "Hi my name is Owen", ["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"], profile_picture);
-let testItem = new Item(Red_gem_earings, 1050, "6mm", "Cartier", "Vintage earings for sale!", "earings", "Used");
-testUser.addItem(testItem);
+// let testUser = new User("Owen Turnbull", "Hi my name is Owen", ["Liam Lock", "Illenium"], ["Michael Bay", "Owen Turnbull"], profile_picture);
+// let testItem = new Item(Red_gem_earings, 1050, "6mm", "Cartier", "Vintage earings for sale!", "earings", "Used");
+// testUser.addItem(testItem);
 
 //Used to pass User object
 export const AppContext = createContext();
@@ -38,13 +38,12 @@ function AuthScreens() {
   );
 }
 const App = () => {
-  const [user, setUser] = useState(testUser);
-  
+  const [user, setUser] = useState("")
   return (
     <SafeAreaProvider>
       <AppContext.Provider value={{user, setUser}}>
         <NavigationContainer theme={MyTheme}>
-         <MyTabs />
+          {user ? <MyTabs /> : <AuthScreens /> }
         </NavigationContainer>
       </AppContext.Provider>
     </SafeAreaProvider>

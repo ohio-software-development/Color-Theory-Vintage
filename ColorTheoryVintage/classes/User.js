@@ -60,4 +60,3 @@ export default class User {
     console.log(`Following: ${this.following}`);
   }
 }
-

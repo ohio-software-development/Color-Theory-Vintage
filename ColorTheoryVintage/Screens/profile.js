@@ -218,6 +218,3 @@ const feedStyles = StyleSheet.create({
     height: 210,
   }
 });
-
-
-
