@@ -2,34 +2,47 @@ import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Header } from "react-native-elements";
 import ItemCard from "../component/ItemCard.js";
+import { Button } from "react-native-elements";
+import {MessageCircle, Menu } from "react-native-feather";
+import { createDrawerNavigator} from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 import { AppContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { Text } from '@rneui/themed';
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 
+
+
 const Home = () => {
+  const navigation = useNavigation(); // Use useNavigation to get the navigation object
   const user = useContext(AppContext);
 
-  const [url, setUrl] = useState();
+  // const [url, setUrl] = useState();
 
-  useEffect(() => {
-    const func = async () => {
-      const storage = getStorage();
-      const reference = ref(storage, "/download.jpg");
-      await getDownloadURL(reference).then((x) => {
-
-        setUrl(x);
-      });
-    };
-    func();
-  });
+  // useEffect(() => {
+  //   const func = async () => {
+  //     const storage = getStorage();
+  //     const reference = ref(storage, "/download.jpg");
+  //     await getDownloadURL(reference).then((x) => {
+  //       setUrl(x);
+  //     });
+  //   };
+  //   func();
+  // });
 
   return (
     <View>
       <Header
         containerStyle={headerStyles.headerContainer}
-        leftComponent={{ icon: "menu", color: headerStyles.menuIcon.color }}
+        leftComponent={<Menu
+              onPress={() => navigation.toggleDrawer()}
+              title="Side Panel"/> }
+        rightComponent={
+         <MessageCircle
+              onPress={() => navigation.navigate('ExperimentScreen')}
+              title="Message"/> 
+        }
         centerComponent={{
           text: "Color Theory Vintage!",
           style: headerStyles.headerText,
