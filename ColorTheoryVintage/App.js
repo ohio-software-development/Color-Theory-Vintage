@@ -6,8 +6,7 @@ import ListingScreen from "./Screens/ListingScreen";
 import User from "./classes/User.js";
 import Item from "./classes/Item.js";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-const Red_gem_earings = require("./assets/earings.webp")
-const profile_picture = require("./assets/cat.jpeg");
+
 import firebaseConfig from "./firebaseconfig";
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';

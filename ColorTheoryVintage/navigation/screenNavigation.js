@@ -5,6 +5,7 @@ import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
 import ExperimentScreen from "../Screens/experimentScreen";
+import ChatScreen from "../Screens/Chat";
 
 import NewItem from "../Screens/NewItem";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -34,7 +35,9 @@ const HomeScreenNavigator = () => {
         options={{
           tabBarStyle: { display: "none" },
         }}
-        />
+      />
+      
+      
     </Stack.Navigator>
   )
 }
@@ -77,6 +80,7 @@ const HomeDrawerNavigator = () => {
       <Drawer.Screen name="Color Theory Vintage" component={Home} options={{headerShown: false}} />
       <Stack.Screen name="ListingScreen" component={ListingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
 
     </Drawer.Navigator>
   );
@@ -117,6 +121,7 @@ const ExperimentScreenNavigator = () => {
       <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
       <Stack.Screen name="ProfileScreen" component={Profile} />
       <Stack.Screen name="ListingScreen" component={ListingScreen} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
      
     </Stack.Navigator>
   );
