@@ -11,9 +11,9 @@ const Login = () => {
     const {user, setUser} = useContext(AppContext);
     const auth = getAuth()
     //ows8turnbull@gmail.com
-    const [email, setEmail] = useState("");
-    //vYxdu2-xobfif-sosbyr
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("ows8turnbull@gmail.com");
+    //123456
+    const [password, setPassword] = useState("123456");
     const onPressLogin = async () => {
         let userId = ""
         await signInWithEmailAndPassword(auth, email, password)
@@ -24,7 +24,7 @@ const Login = () => {
         let userData = await getUser(userId).catch((error) => console.log(error))
         setUser(new User(userData.name,userId, userData.listings))
     };
-    // if(email && password){onPressLogin()}
+    if(email && password){onPressLogin()}
     const onPressForgotPassword = () => {
     // Do something about forgot password operation
     };
