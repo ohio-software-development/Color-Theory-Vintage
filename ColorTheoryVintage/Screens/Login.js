@@ -9,22 +9,22 @@ import User from '../classes/User';
 const Login = () => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
+    const auth = getAuth()
     //ows8turnbull@gmail.com
     const [email, setEmail] = useState("");
     //vYxdu2-xobfif-sosbyr
     const [password, setPassword] = useState("");
     const onPressLogin = async () => {
-        const auth = getAuth()
         let userId = ""
         await signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 userId = userCredential.user.uid
             })
-            .catch(() => console.log("sign in rejected"));
-        let userData = await getUser(userId).catch(() => console.log("could not get user data"))
+            .catch((error) => console.log(error));
+        let userData = await getUser(userId).catch((error) => console.log(error))
         setUser(new User(userData.name,userId, userData.listings))
     };
-    if(email && password){onPressLogin()}
+    // if(email && password){onPressLogin()}
     const onPressForgotPassword = () => {
     // Do something about forgot password operation
     };

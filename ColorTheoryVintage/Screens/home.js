@@ -38,17 +38,19 @@ const Home = () => {
       
     };
     fetchData();
+    let refs = []; 
     const fetchImage = async () => {
       try {
         for(let listing of listings){
           const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
-          setImageURLS(imageURLS => [...imageURLS, response]);
+          refs.push(response);
         }
       } catch (error) {
         console.error("Error fetching image:", error);
       }
     };
     fetchImage();
+    setImageURLS(refs);
   
   }, [db, listings]);
   return (
