@@ -1,19 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useFetch, useAsync } from "react-async";
 import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
+import {MessageCircle, Menu } from "react-native-feather";
 import { Header } from "react-native-elements";
 import ListingCard from "../component/ListingCard.js";
 import { AppContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { InitialApp, initializeApp } from "firebase/app"; // validate self
 import { getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
-import { getFirestore, getDocs, collection, doc } from "firebase/firestore";
+import { getFirestore, getDocs, collection, doc, query, onSnapshot, orderBy, limit} from "firebase/firestore";
 import GetPicture from "../api/getPicture.js";
+import { createDrawerNavigator} from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 
 var width = Dimensions.get('window').width/2; //full width
-console.log(width)
 const Home = () => {
   const user = useContext(AppContext);
+  const navigation = useNavigation(); // Use useNavigation to get the navigation object
   const db = getFirestore();
   const storageRef = getStorage();
   const [listings, setListings] = useState([]);
@@ -23,10 +26,16 @@ const Home = () => {
     if(imageURLS.length > 0) return;
     const fetchData = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "Listings")).catch(() => {console.log("error fetching data"); return});
+        const listingRef = collection(db, "Listings");
+        const q = query(listingRef, orderBy("price"), limit(3));
+        const querySnapshot = await getDocs(q);
+        /*
+        old implimentation        
+        const snapshot = await getDocs(collection(db, "Listings")).limit(10).catch(() => {console.log("error fetching data"); return});
         const listingData = snapshot.docs.map(doc => doc.data());
-        // console.log("this is the listing data");
-        // console.log(listingData)
+        */
+        const listingData = querySnapshot.docs.map(doc => doc.data());
+
         setListings(listingData);
       } catch (error) {
         console.error("Error fetching listings:", error);
@@ -34,10 +43,12 @@ const Home = () => {
       
     };
     fetchData();
+    // let refs = []; 
     const fetchImage = async () => {
       try {
         for(let listing of listings){
           const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
+          // refs.push(response);         
           setImageURLS(imageURLS => [...imageURLS, response]);
         }
       } catch (error) {
@@ -45,13 +56,21 @@ const Home = () => {
       }
     };
     fetchImage();
+    // setImageURLS(refs);
   
   }, [db, listings]);
   return (
     <View>
       <Header
         containerStyle={headerStyles.headerContainer}
-        leftComponent={{ icon: "menu", color: headerStyles.menuIcon.color }}
+        leftComponent={<Menu
+              onPress={() => navigation.toggleDrawer()}
+              title="Side Panel"/> }
+        rightComponent={
+         <MessageCircle
+              onPress={() => navigation.navigate('ExperimentScreen')}
+              title="Message"/> 
+        }
         centerComponent={{
           text: "Color Theory Vintage!",
           style: headerStyles.headerText,
@@ -128,4 +147,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-

@@ -11,6 +11,9 @@ import { collection, getFirestore, getDoc, getDocs,doc } from "firebase/firestor
 
 var width = Dimensions.get('window').width/2; //full width
 const Profile = () => {
+  //Figure out which users are chatting with eachother
+  //grab their specific chat history
+  //configure chats correctly
   const navigation = useNavigation();
   const {user, setUser} = useContext(AppContext);
   const [imageURLS, setImageURLS] = useState([]);
@@ -218,6 +221,3 @@ const feedStyles = StyleSheet.create({
     height: 210,
   }
 });
-
-
-

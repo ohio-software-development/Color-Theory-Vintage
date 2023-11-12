@@ -4,12 +4,15 @@ import Home from "../Screens/home";
 import Explore from "../Screens/explore";
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
+import ExperimentScreen from "../Screens/experimentScreen";
+import ChatScreen from "../Screens/Chat";
 
 import NewItem from "../Screens/NewItem";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
-
+const Drawer = createDrawerNavigator();
 const HomeScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -32,7 +35,9 @@ const HomeScreenNavigator = () => {
         options={{
           tabBarStyle: { display: "none" },
         }}
-        />
+      />
+      
+      
     </Stack.Navigator>
   )
 }
@@ -69,6 +74,19 @@ const ExploreScreenNavigator = () => {
 export {ExploreScreenNavigator};
 
 
+const HomeDrawerNavigator = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Color Theory Vintage" component={Home} options={{headerShown: false}} />
+      <Stack.Screen name="ListingScreen" component={ListingScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+
+    </Drawer.Navigator>
+  );
+};
+export { HomeDrawerNavigator };
+
 const ProfileScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -96,3 +114,17 @@ const ProfileScreenNavigator = () => {
 }
 
 export {ProfileScreenNavigator};
+
+const ExperimentScreenNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="ProfileScreen" component={Profile} />
+      <Stack.Screen name="ListingScreen" component={ListingScreen} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+     
+    </Stack.Navigator>
+  );
+};
+
+export { ExperimentScreenNavigator };
