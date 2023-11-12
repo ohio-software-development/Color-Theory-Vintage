@@ -7,6 +7,7 @@ import { AppContext } from "../App";
 import ListingCard from "../component/ListingCard";
 import { getDownloadURL, getStorage, ref} from 'firebase/storage';
 import { collection, getFirestore, getDoc, getDocs,doc } from "firebase/firestore";
+import { TouchableOpacity} from 'react-native';
 
 
 var width = Dimensions.get('window').width/2; //full width
@@ -94,8 +95,9 @@ const Profile = () => {
               paddingHorizontal: 16,
               marginLeft: 12,
             }}
+            onPress = {() => navigation.navigate("followScreen", {isLoadingFollowers: false})}
           >
-            9
+            {user.numListings} 
           </Text>
           <Text style={{ fontSize: 20, color: "grey", paddingLeft: 10 }}>
             Posts
@@ -110,10 +112,11 @@ const Profile = () => {
               paddingHorizontal: 16,
               marginLeft: 12,
             }}
+            onPress={() => navigation.navigate("followScreen", {isLoadingFollowers: true})}
           >
-            28
+            {user.numFollowers}
           </Text>
-          <Text style={{ fontSize: 20, color: "grey"}}>
+          <Text onPress={() => navigation.navigate("followScreen", {isLoadingFollowers: true})} style={{fontSize: 20, color: "grey"}}>
             Followers
           </Text>
         </View>
@@ -127,9 +130,9 @@ const Profile = () => {
               marginLeft: 15,
             }}
           >
-            12
+            {user.numFollowing}
           </Text>
-          <Text style={{ fontSize: 20, color: "grey" }}>
+          <Text style={{ fontSize: 20, color: "grey" }}onPress = {() => navigation.navigate("followScreen", {isLoadingFollowers: false})}>
             Following
           </Text>
         </View>

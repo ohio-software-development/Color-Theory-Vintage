@@ -22,7 +22,7 @@ const Login = () => {
             })
             .catch((error) => console.log(error));
         let userData = await getUser(userId).catch((error) => console.log(error))
-        setUser(new User(userData.name,userId, userData.listings))
+        setUser(new User(userData.name,userId, userData.listings,"Whats up!", userData.followers, userData.following))
     };
     if(email && password){onPressLogin()}
     const onPressForgotPassword = () => {

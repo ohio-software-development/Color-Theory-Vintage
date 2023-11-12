@@ -1,18 +1,19 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import ListingScreen from "../Screens/ListingScreen";
-import Home from "../Screens/home";
-import Explore from "../Screens/explore";
+import Home from "../Screens/home";;
 import Profile from "../Screens/profile";
 import UserScreen from "../Screens/UserScreen";
 import ExperimentScreen from "../Screens/experimentScreen";
 import ChatScreen from "../Screens/Chat";
-
 import NewItem from "../Screens/NewItem";
+import FollowersScreen from "../Screens/followScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-
+import Search from "../Screens/search";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
+
 const HomeScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -44,12 +45,12 @@ const HomeScreenNavigator = () => {
 
 export {HomeScreenNavigator};
 
-const ExploreScreenNavigator = () => {
+const searchScreenNavitgator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name = "ExploreScreen"
-        component={Explore}
+        name = "searchScreen"
+        component={Search}
       />
       <Stack.Screen 
         name = "ListingScreen"
@@ -59,7 +60,6 @@ const ExploreScreenNavigator = () => {
         name="UserScreen"
         component={UserScreen}
       />
-
       <Stack.Screen
         name="NewListingScreen"
         component={NewItem}
@@ -71,7 +71,7 @@ const ExploreScreenNavigator = () => {
   )
 }
 
-export {ExploreScreenNavigator};
+export {searchScreenNavitgator};
 
 
 const HomeDrawerNavigator = () => {
@@ -109,6 +109,13 @@ const ProfileScreenNavigator = () => {
           tabBarStyle: { display: "none" },
         }}
         />
+      <Stack.Screen 
+        name="followScreen"
+        component={FollowersScreen}
+        options={{
+          tabBarStyle: { display: "none" }
+        }}
+      />
     </Stack.Navigator>
   )
 }

@@ -96,12 +96,15 @@ export default NewItem = () => {
       setStep(3)
     }
     else if((step == 3) && (price && size)){
+      //set primliminary types
       data = {
         "type": type,
         "brand": brand,
         "size": size,
         "price": price,
         "description": description,
+        "followers": [],
+        "following": [],
       }
       addNewListing(data, photo)
       navigation.navigate("homeScreen");
