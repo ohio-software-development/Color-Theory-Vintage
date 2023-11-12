@@ -11,9 +11,9 @@ const Login = () => {
     const {user, setUser} = useContext(AppContext);
     const auth = getAuth()
     //ows8turnbull@gmail.com
-    const [email, setEmail] = useState("ows8turnbull@gmail.com");
+    const [email, setEmail] = useState("bp309420@ohio.edu");
     //123456
-    const [password, setPassword] = useState("123456");
+    const [password, setPassword] = useState("1234567");
     const onPressLogin = async () => {
         let userId = ""
         await signInWithEmailAndPassword(auth, email, password)

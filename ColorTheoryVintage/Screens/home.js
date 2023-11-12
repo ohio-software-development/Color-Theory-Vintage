@@ -22,43 +22,43 @@ const Home = () => {
   const [listings, setListings] = useState([]);
   const [imageURLS, setImageURLS] = useState([]);
 
-  useEffect(() => {
-    if(imageURLS.length > 0) return;
-    const fetchData = async () => {
-      try {
-        const listingRef = collection(db, "Listings");
-        const q = query(listingRef, orderBy("price"), limit(3));
-        const querySnapshot = await getDocs(q);
-        /*
-        old implimentation        
-        const snapshot = await getDocs(collection(db, "Listings")).limit(10).catch(() => {console.log("error fetching data"); return});
-        const listingData = snapshot.docs.map(doc => doc.data());
-        */
-        const listingData = querySnapshot.docs.map(doc => doc.data());
+  // useEffect(() => {
+  //   if(imageURLS.length > 0) return;
+  //   const fetchData = async () => {
+  //     try {
+  //       const listingRef = collection(db, "Listings");
+  //       const q = query(listingRef, orderBy("price"), limit(3));
+  //       const querySnapshot = await getDocs(q);
+  //       /*
+  //       old implimentation        
+  //       const snapshot = await getDocs(collection(db, "Listings")).limit(10).catch(() => {console.log("error fetching data"); return});
+  //       const listingData = snapshot.docs.map(doc => doc.data());
+  //       */
+  //       const listingData = querySnapshot.docs.map(doc => doc.data());
 
-        setListings(listingData);
-      } catch (error) {
-        console.error("Error fetching listings:", error);
-      }
+  //       setListings(listingData);
+  //     } catch (error) {
+  //       console.error("Error fetching listings:", error);
+  //     }
       
-    };
-    fetchData();
-    // let refs = []; 
-    const fetchImage = async () => {
-      try {
-        for(let listing of listings){
-          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
-          // refs.push(response);         
-          setImageURLS(imageURLS => [...imageURLS, response]);
-        }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    };
-    fetchImage();
-    // setImageURLS(refs);
+  //   };
+  //   fetchData();
+  //   // let refs = []; 
+  //   const fetchImage = async () => {
+  //     try {
+  //       for(let listing of listings){
+  //         const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
+  //         // refs.push(response);         
+  //         setImageURLS(imageURLS => [...imageURLS, response]);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching image:", error);
+  //     }
+  //   };
+  //   fetchImage();
+  //   // setImageURLS(refs);
   
-  }, [db, listings]);
+  // }, [db, listings]);
   return (
     <View>
       <Header

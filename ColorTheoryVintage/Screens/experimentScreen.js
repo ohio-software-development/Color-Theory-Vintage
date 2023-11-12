@@ -9,7 +9,6 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import icons8 from "../assets/icons8-message.gif";
 import waitingMessage from "../assets/icons8-message-50.png";
 import {ArrowLeft} from "react-native-feather";

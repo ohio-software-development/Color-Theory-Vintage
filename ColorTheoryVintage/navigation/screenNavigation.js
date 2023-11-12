@@ -79,7 +79,7 @@ const HomeDrawerNavigator = () => {
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Color Theory Vintage" component={Home} options={{headerShown: false}} />
       <Stack.Screen name="ListingScreen" component={ListingScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} />
+      <Stack.Screen name="ExperimentScreen" component={ExperimentScreen} options={{ headerShown: false }}/>
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
 
     </Drawer.Navigator>
