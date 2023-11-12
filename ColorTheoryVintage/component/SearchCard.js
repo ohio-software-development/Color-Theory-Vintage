@@ -1,20 +1,20 @@
 import { SearchBar } from "react-native-elements";
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { useState } from "react";
+import { StyleSheet, View } from 'react-native';
+import React, { useState } from "react";
 
-const SearchCard = () => {
+const SearchCard = ({ onChangeText }) => {
   const [search, setSearch] = useState("");
 
-  updateSearch = (searchTerm) => {
+  const updateSearch = (searchTerm) => {
     setSearch(searchTerm);
-    console.log(searchTerm);
+    onChangeText(searchTerm); // Pass the typed text back to the parent component
   };
 
   return (
-    <View style = {{width:'100%'}}>
+    <View style={{ width: '100%' }}>
       <SearchBar
         placeholder="Type Here..."
-        onChangeText={this.updateSearch}
+        onChangeText={updateSearch}
         value={search}
       />
     </View>
