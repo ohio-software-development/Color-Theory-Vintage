@@ -125,6 +125,34 @@ const Home = () => {
   const storageRef = getStorage();
   const [listings, setListings] = useState([]);
   const [imageURLS, setImageURLS] = useState([]);
+  useEffect(() => {
+    if(imageURLS.length > 0) return;
+    const fetchData = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "Listings")).catch(() => {console.log("error fetching data"); return});
+        const listingData = snapshot.docs.map(doc => doc.data());
+        // console.log("this is the listing data");
+        // console.log(listingData)
+        setListings(listingData);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+      
+    };
+    fetchData();
+    const fetchImage = async () => {
+      try {
+        for(let listing of listings){
+          const response = await getDownloadURL(ref(storageRef, "/images/" + listing.imageRef));
+          setImageURLS(imageURLS => [...imageURLS, response]);
+        }
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+    fetchImage();
+  
+  }, [db, listings]);
   return (
     <View>
       <Header
@@ -147,6 +175,19 @@ const Home = () => {
       </View>
       <ScrollView>
         <View style={feedStyles.ColumnContainer}>
+        {listings.map((listing, i) => {
+            {/*create new row for every two columns and also make sure that there are at least two items */}
+            if (i % 2 === 0 && listings[i + 1]) {
+              return (
+                <View style={feedStyles.rowContainer} key={i}>
+                  <ListingCard styles={styles.images} listing={listings[i]} listingURL={imageURLS[i]} />
+                  <ListingCard styles={styles.images} listing={listings[i + 1]} listingURL={imageURLS[i + 1]} />
+                </View>
+              );
+            } else {
+              return null; // Render nothing if there are no two consecutive listings available
+            }
+          })}
         </View>
       </ScrollView>
     </View>

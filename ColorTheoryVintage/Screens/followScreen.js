@@ -3,12 +3,15 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getFirestore, collection, where, getDocs } from 'firebase/firestore';
 import { AppContext } from '../App';
-
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { query } from 'firebase/firestore';
 const FollowersScreen = ({ route }) => {
     const { isLoadingFollowers } = route.params;
     const { user } = useContext(AppContext);
     const [followNames, setfollowNames] = useState(null);
     const db = getFirestore();
+    const navigation = useNavigation(); 
     console.log("who am I following?")
     console.log(user.followers)
 //   useEffect(() => {
@@ -24,6 +27,18 @@ const FollowersScreen = ({ route }) => {
 
 //     fetchfollowNames();
 //   }, [db, loadType]);
+  const getUserID = (name) => {
+    const IDs = []
+    const usersRef = collection(db, "Users");
+    const q = query(usersRef, where("name" , "==", name));
+    const snapShot = getDocs(q);
+    console.log(snapShot);
+    snapShot.forEach((doc) => {
+      IDs.push(doc.data());
+    })
+    console.log(IDs);
+    return IDs[0]; 
+  }
     useEffect(() => {
         if(followNames == null){
             setfollowNames(isLoadingFollowers ? user.followers : user.following);
@@ -35,10 +50,16 @@ const FollowersScreen = ({ route }) => {
         return (
             followNames.map((name) => {
               return(
-                <View style={styles.followerItem}>
-                    <Text style={styles.username} key={name}>{name}</Text>
+                <TouchableOpacity onPress={() => {
+                  const userID = getUserID(name)
+                   navigation.push("ProfileScreen") 
+                }}>
+                  <View style={styles.followerItem}>
+                      <Text style={styles.username} key={name}>{name}</Text>
 
-                </View>
+                  </View>
+
+                </TouchableOpacity>
               ) 
             })
         )

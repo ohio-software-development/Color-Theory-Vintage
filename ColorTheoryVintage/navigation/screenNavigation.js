@@ -45,7 +45,7 @@ const HomeScreenNavigator = () => {
 
 export {HomeScreenNavigator};
 
-const searchScreenNavitgator = () => {
+const SearchScreenNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
@@ -71,7 +71,7 @@ const searchScreenNavitgator = () => {
   )
 }
 
-export {searchScreenNavitgator};
+export {SearchScreenNavigator};
 
 
 const HomeDrawerNavigator = () => {
@@ -93,6 +93,7 @@ const ProfileScreenNavigator = () => {
       <Stack.Screen
         name = "ProfileScreen"
         component={Profile}
+        initialParams={{userID: null}}
       />
       <Stack.Screen 
         name = "ListingScreen"
