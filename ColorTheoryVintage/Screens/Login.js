@@ -9,20 +9,21 @@ import User from '../classes/User';
 const Login = () => {
     const navigation = useNavigation();
     const {user, setUser} = useContext(AppContext);
+    const auth = getAuth()
+    //ows8turnbull@gmail.com
     const [email, setEmail] = useState("ows8turnbull@gmail.com");
-    const [password, setPassword] = useState("vYxdu2-xobfif-sosbyr");
+    //123456
+    const [password, setPassword] = useState("123456");
     const onPressLogin = async () => {
-        const auth = getAuth()
         let userId = ""
         await signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 userId = userCredential.user.uid
             })
-            .catch(() => console.log("sign in rejected"));
-        let userData = await getUser(userId).catch(() => console.log("could not get user data"))
-        setUser(new User(userData.name,userId, userData.listings))
+            .catch((error) => console.log(error));
+        let userData = await getUser(userId).catch((error) => console.log(error))
+        setUser(new User(userData.name,userId, userData.listings,"Whats up!", userData.followers, userData.following))
     };
-    //uncomment if you want auto login
     if(email && password){onPressLogin()}
     const onPressForgotPassword = () => {
     // Do something about forgot password operation

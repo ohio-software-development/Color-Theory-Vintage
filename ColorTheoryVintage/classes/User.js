@@ -3,14 +3,18 @@ import { getStorage } from "firebase/storage";
 import { getDownloadURL } from "firebase/storage";
 
 export default class User {
-  constructor(name="", id="", listings=[], bio="", followers=0, following=0, profile_picture=null) {
+  constructor(name="", id="", listings=[], bio="", followers=[], following=[], profile_picture=null) {
     this.listings = listings;
+    this.numListings = this.listings.length;
+    // this.numListings = 0;
     this.id = id
     this.name = name;
     this.bio = bio;
     this.currentItemsIndex = 0;
     this.followers = followers;
+    this.numFollowers = this.followers.length
     this.following = following;
+    this.numFollowing = this.following.length;
     this.profile_picture = profile_picture
   }
 

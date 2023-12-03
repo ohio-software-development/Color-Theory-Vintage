@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Search, Home, User, MessageCircle } from "react-native-feather";
-import { Ionicons } from '@expo/vector-icons'
-import {HomeScreenNavigator, ExploreScreenNavigator, ProfileScreenNavigator, ExperimentScreenNavigator, HomeDrawerNavigator} from '../navigation/screenNavigation'
+import {HomeScreenNavigator,  SearchScreenNavigator, ProfileScreenNavigator, ExperimentScreenNavigator, HomeDrawerNavigator} from '../navigation/screenNavigation'
 
 
 const Tab = createBottomTabNavigator();
@@ -15,8 +14,8 @@ const MyTabs = () => {
           options={{tabBarLabel:() => {return null}, tabBarIcon: ({ color, size }) => (<Home color={"black"}/>)}}
         />
         <Tab.Screen 
-          name="Explore" 
-          component={ExploreScreenNavigator} 
+          name="Search" 
+          component={SearchScreenNavigator} 
           options={{tabBarLabel:() => {return null}, tabBarIcon: ({ color, size }) => (<Search color={"black"}/>)}}
         />
         <Tab.Screen 

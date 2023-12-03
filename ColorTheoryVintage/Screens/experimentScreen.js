@@ -134,7 +134,7 @@ const ExperimentScreen = () => {
       callIcon = icons8; //'https://img.icons8.com/color/48/000000/video-call.png'
     }
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")}>
         <View style={styles.row}>
           <Image source={{ uri: item.image }} style={styles.pic} />
           <View>
